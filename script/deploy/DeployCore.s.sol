@@ -6,7 +6,6 @@ import {VmSafe} from "forge-std/Vm.sol";
 import "forge-std/console.sol";
 import {TermMaxFactory} from "contracts/v1/factory/TermMaxFactory.sol";
 import {ITermMaxFactory} from "contracts/v1/factory/ITermMaxFactory.sol";
-import {ITermMaxRouter} from "contracts/v1/router/ITermMaxRouter.sol";
 import {MarketViewer} from "contracts/v1/router/MarketViewer.sol";
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {TermMaxMarket} from "contracts/v1/TermMaxMarket.sol";
@@ -21,19 +20,18 @@ import {Faucet} from "contracts/v1/test/testnet/Faucet.sol";
 import {DeployBase} from "./DeployBase.s.sol";
 import {IOracle} from "contracts/v1/oracle/IOracle.sol";
 import {VaultFactory, IVaultFactory} from "contracts/v1/factory/VaultFactory.sol";
-import {KyberswapV2Adapter} from "contracts/v1/router/swapAdapters/KyberswapV2Adapter.sol";
-import {OdosV2Adapter} from "contracts/v1/router/swapAdapters/OdosV2Adapter.sol";
-import {PendleSwapV3Adapter} from "contracts/v1/router/swapAdapters/PendleSwapV3Adapter.sol";
-import {UniswapV3Adapter} from "contracts/v1/router/swapAdapters/UniswapV3Adapter.sol";
-import {ERC4626VaultAdapter} from "contracts/v1/router/swapAdapters/ERC4626VaultAdapter.sol";
+import {OdosV2AdapterV2} from "contracts/v1/router/specAdapters/OdosV2AdapterV2.sol";
+import {PendleSwapV3AdapterV2} from "contracts/v1/router/specAdapters/PendleSwapV3AdapterV2.sol";
+import {UniswapV3AdapterV2} from "contracts/v1/router/specAdapters/UniswapV3AdapterV2.sol";
+import {ERC4626VaultAdapterV2} from "contracts/v1/router/specAdapters/ERC4626VaultAdapterV2.sol";
 import {AccessManager} from "contracts/v1/access/AccessManager.sol";
+import {TermMaxRouter_Repay_Gt} from "contracts/v1/router/TermMaxRouter_Repay_Gt.sol";
 
 contract DeployCore is DeployBase {
     // Network-specific config loaded from environment variables
     string network;
     uint256 deployerPrivateKey;
     address deployerAddr;
-    address adminAddr;
     address accessManagerAddr;
     address uniswapV3RouterAddr;
     address odosV2RouterAddr;
@@ -43,13 +41,13 @@ contract DeployCore is DeployBase {
     AccessManager accessManager;
     ITermMaxFactory factory;
     IVaultFactory vaultFactory;
+    TermMaxRouter_Repay_Gt router;
     IOracle oracleAggregator;
-    ITermMaxRouter router;
     MarketViewer marketViewer;
-    UniswapV3Adapter uniswapV3Adapter;
-    OdosV2Adapter odosV2Adapter;
-    PendleSwapV3Adapter pendleSwapV3Adapter;
-    ERC4626VaultAdapter vaultAdapter;
+    UniswapV3AdapterV2 uniswapV3Adapter;
+    OdosV2AdapterV2 odosV2Adapter;
+    PendleSwapV3AdapterV2 pendleSwapV3Adapter;
+    ERC4626VaultAdapterV2 vaultAdapter;
     SwapAdapter swapAdapter;
     Faucet faucet;
 
@@ -59,16 +57,15 @@ contract DeployCore is DeployBase {
         string memory networkUpper = toUpper(network);
 
         // Load network-specific configuration
-        string memory privateKeyVar = string.concat(networkUpper, "_DEPLOYER_PRIVATE_KEY");
-        string memory adminVar = string.concat(networkUpper, "_ADMIN_ADDRESS");
-
-        deployerPrivateKey = vm.envUint(privateKeyVar);
+        string memory deployerPrivateKeyVar = string.concat(networkUpper, "_DEPLOYER_PRIVATE_KEY");
+        deployerPrivateKey = vm.envUint(deployerPrivateKeyVar);
         deployerAddr = vm.addr(deployerPrivateKey);
-        adminAddr = vm.envAddress(adminVar);
 
         if (
             keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("eth-mainnet"))
                 || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("arb-mainnet"))
+                || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("bnb-mainnet"))
+                || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("bera-mainnet"))
         ) {
             string memory uniswapV3RouterVar = string.concat(networkUpper, "_UNISWAP_V3_ROUTER_ADDRESS");
             string memory odosV2RouterVar = string.concat(networkUpper, "_ODOS_V2_ROUTER_ADDRESS");
@@ -88,6 +85,7 @@ contract DeployCore is DeployBase {
 
     function run() public {
         console.log("Network:", network);
+        console.log("Deployer:", deployerAddr);
         console.log("Deployer balance:", deployerAddr.balance);
 
         uint256 currentBlock = block.number;
@@ -97,6 +95,8 @@ contract DeployCore is DeployBase {
         if (
             keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("eth-mainnet"))
                 || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("arb-mainnet"))
+                || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("bnb-mainnet"))
+                || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("bera-mainnet"))
         ) {
             (
                 factory,
@@ -130,7 +130,6 @@ contract DeployCore is DeployBase {
 
         console.log("===== Core Info =====");
         console.log("Deployer:", deployerAddr);
-        console.log("Admin:", adminAddr);
         console.log("Factory deployed at:", address(factory));
         console.log("VaultFactory deployed at:", address(vaultFactory));
         console.log("Oracle Aggregator deployed at:", address(oracleAggregator));
@@ -158,7 +157,7 @@ contract DeployCore is DeployBase {
                 '  "gitBranch": "',
                 getGitBranch(),
                 '",\n',
-                '  "gitCommitHash": "0x',
+                '  "gitCommitHash": "',
                 vm.toString(getGitCommitHash()),
                 '",\n',
                 '  "blockInfo": {\n',
@@ -171,9 +170,6 @@ contract DeployCore is DeployBase {
                 "  },\n",
                 '  "deployer": "',
                 vm.toString(deployerAddr),
-                '",\n',
-                '  "admin": "',
-                vm.toString(adminAddr),
                 '",\n',
                 '  "contracts": {\n',
                 '    "factory": "',

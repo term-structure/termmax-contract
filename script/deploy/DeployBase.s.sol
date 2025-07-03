@@ -8,9 +8,8 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import {TermMaxFactory} from "contracts/v1/factory/TermMaxFactory.sol";
 import {ITermMaxFactory} from "contracts/v1/factory/ITermMaxFactory.sol";
-import {TermMaxRouter} from "contracts/v1/router/TermMaxRouter.sol";
+import {TermMaxRouter_Repay_Gt} from "contracts/v1/router/TermMaxRouter_Repay_Gt.sol";
 import {MarketViewer} from "contracts/v1/router/MarketViewer.sol";
-import {ITermMaxRouter} from "contracts/v1/router/ITermMaxRouter.sol";
 import {TermMaxMarket} from "contracts/v1/TermMaxMarket.sol";
 import {TermMaxOrder} from "contracts/v1/TermMaxOrder.sol";
 import {MockERC20} from "contracts/v1/test/MockERC20.sol";
@@ -36,10 +35,6 @@ import {ERC4626VaultAdapterV2} from "contracts/v1/router/specAdapters/ERC4626Vau
 import {OdosV2AdapterV2} from "contracts/v1/router/specAdapters/OdosV2AdapterV2.sol";
 import {PendleSwapV3AdapterV2} from "contracts/v1/router/specAdapters/PendleSwapV3AdapterV2.sol";
 import {UniswapV3AdapterV2} from "contracts/v1/router/specAdapters/UniswapV3AdapterV2.sol";
-import {ERC4626VaultAdapter} from "contracts/v1/router/swapAdapters/ERC4626VaultAdapter.sol";
-import {OdosV2Adapter} from "contracts/v1/router/swapAdapters/OdosV2Adapter.sol";
-import {PendleSwapV3Adapter} from "contracts/v1/router/swapAdapters/PendleSwapV3Adapter.sol";
-import {UniswapV3Adapter} from "contracts/v1/router/swapAdapters/UniswapV3Adapter.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 import {AccessManager} from "contracts/v1/access/AccessManager.sol";
 import {StringHelper} from "../utils/StringHelper.sol";
@@ -64,11 +59,11 @@ contract DeployBase is Script {
         oracle = new OracleAggregator(admin, timelock);
     }
 
-    function deployRouter(address admin) public returns (TermMaxRouter router) {
-        TermMaxRouter implementation = new TermMaxRouter();
-        bytes memory data = abi.encodeCall(TermMaxRouter.initialize, admin);
+    function deployRouter(address admin) public returns (TermMaxRouter_Repay_Gt router) {
+        TermMaxRouter_Repay_Gt implementation = new TermMaxRouter_Repay_Gt();
+        bytes memory data = abi.encodeCall(TermMaxRouter_Repay_Gt.initialize, admin);
         ERC1967Proxy proxy = new ERC1967Proxy(address(implementation), data);
-        router = TermMaxRouter(address(proxy));
+        router = TermMaxRouter_Repay_Gt(address(proxy));
     }
 
     function deployAccessManager(address admin) public returns (AccessManager accessManager) {
@@ -85,7 +80,7 @@ contract DeployBase is Script {
             TermMaxFactory factory,
             VaultFactory vaultFactory,
             OracleAggregator oracleAggregator,
-            TermMaxRouter router,
+            TermMaxRouter_Repay_Gt router,
             SwapAdapter swapAdapter,
             Faucet faucet,
             MarketViewer marketViewer
@@ -129,12 +124,12 @@ contract DeployBase is Script {
             TermMaxFactory factory,
             VaultFactory vaultFactory,
             OracleAggregator oracleAggregator,
-            TermMaxRouter router,
+            TermMaxRouter_Repay_Gt router,
             MarketViewer marketViewer,
-            UniswapV3Adapter uniswapV3Adapter,
-            OdosV2Adapter odosV2Adapter,
-            PendleSwapV3Adapter pendleSwapV3Adapter,
-            ERC4626VaultAdapter vaultAdapter
+            UniswapV3AdapterV2 uniswapV3Adapter,
+            OdosV2AdapterV2 odosV2Adapter,
+            PendleSwapV3AdapterV2 pendleSwapV3Adapter,
+            ERC4626VaultAdapterV2 vaultAdapter
         )
     {
         // deploy access manager
@@ -156,10 +151,10 @@ contract DeployBase is Script {
         marketViewer = deployMarketViewer();
 
         // deploy and whitelist swap adapter
-        uniswapV3Adapter = new UniswapV3Adapter(address(uniswapV3Router));
-        odosV2Adapter = new OdosV2Adapter(odosV2Router);
-        pendleSwapV3Adapter = new PendleSwapV3Adapter(address(pendleSwapV3Router));
-        vaultAdapter = new ERC4626VaultAdapter();
+        uniswapV3Adapter = new UniswapV3AdapterV2(address(uniswapV3Router));
+        odosV2Adapter = new OdosV2AdapterV2(odosV2Router);
+        pendleSwapV3Adapter = new PendleSwapV3AdapterV2(address(pendleSwapV3Router));
+        vaultAdapter = new ERC4626VaultAdapterV2();
 
         accessManager.setAdapterWhitelist(router, address(uniswapV3Adapter), true);
         accessManager.setAdapterWhitelist(router, address(odosV2Adapter), true);
@@ -186,7 +181,7 @@ contract DeployBase is Script {
         AccessManager accessManager = AccessManager(accessManagerAddr);
 
         // deploy router
-        TermMaxRouter router = TermMaxRouter(routerAddr);
+        TermMaxRouter_Repay_Gt router = TermMaxRouter_Repay_Gt(routerAddr);
 
         // deploy and whitelist swap adapter
         uniswapV3Adapter = new UniswapV3AdapterV2(address(uniswapV3Router));

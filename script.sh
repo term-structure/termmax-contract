@@ -3,7 +3,7 @@
 # Check if required arguments are provided
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <network> <command> [options]"
-    echo "Supported networks: eth-sepolia, arb-sepolia, eth-mainnet, arb-mainnet"
+    echo "Supported networks: eth-sepolia, arb-sepolia, eth-mainnet, arb-mainnet, bnb-mainnet, bnb-testnet, bera-testnet, bera-mainnet"
     echo ""
     echo "Commands:"
     echo "  1. Deployment Commands:"
@@ -76,12 +76,12 @@ done
 
 # Validate network
 case $NETWORK in
-    "eth-sepolia"|"arb-sepolia"|"eth-mainnet"|"arb-mainnet"|"bnb-mainnet"|"bnb-testnet")
+    "eth-sepolia"|"arb-sepolia"|"eth-mainnet"|"arb-mainnet"|"bnb-mainnet"|"bnb-testnet"|"bera-testnet"|"bera-mainnet")
         echo "Running on $NETWORK..."
         ;;
     *)
         echo "Unsupported network: $NETWORK"
-        echo "Supported networks: eth-sepolia, arb-sepolia, eth-mainnet, arb-mainnet"
+        echo "Supported networks: eth-sepolia, arb-sepolia, eth-mainnet, arb-mainnet, bnb-mainnet, bnb-testnet, bera-testnet, bera-mainnet"
         exit 1
         ;;
 esac

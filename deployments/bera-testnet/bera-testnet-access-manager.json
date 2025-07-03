@@ -1,0 +1,15 @@
+{
+  "network": "bera-testnet",
+  "deployedAt": "1751555293",
+  "gitBranch": "deployment",
+  "gitCommitHash": "0x1fe579217606e38614b2461c71e110b433f73cac",
+  "blockInfo": {
+    "number": "6187512",
+    "timestamp": "1751555293"
+  },
+  "deployer": "0xE355d5D8aa52EF0FbbD037C4a3C5E6Fd659cf46B",
+  "admin": "0x81f314f70702Bbe89FEd0F2cFe6841950275E0b7",
+  "contracts": {
+    "accessManager": "0xF28546cFbBBB0474aa77ec692e35AbebB6ba98E1"
+  }
+}
