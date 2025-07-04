@@ -318,6 +318,9 @@ contract DeployBase is Script {
             TermMaxMarket market =
                 TermMaxMarket(accessManager.createMarket(factory, GT_ERC20, initialParams, config.salt));
             markets[i] = market;
+
+            config.collateralConfig.priceFeedAddr = address(collateralPriceFeed);
+            config.underlyingConfig.priceFeedAddr = address(underlyingPriceFeed);
         }
     }
 

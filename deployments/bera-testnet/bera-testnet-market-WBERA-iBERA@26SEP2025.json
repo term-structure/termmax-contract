@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0x22f532e8eeb9575a11ea768217d9c6a9b0a22f7e"
+  },
+  "blockInfo": {
+    "number": "6222879",
+    "timestamp": "1751619106"
+  },
+  "market": "0xB97542AdCE3047e8bb7087E21194cb26C7764287",
+  "collateral": {
+    "address": "0x74092f3DEC661e20188aFCF24A42E4F457A4042a",
+    "symbol": "iBERA",
+    "priceFeed": "0x9666793582Fb77D43813A73f274E0Fd4F162CFeD",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0x7eca31Ed37E29a3413A7b50C516b23FDE9ED37C2",
+    "symbol": "WBERA",
+    "priceFeed": "0x45316D5DAc5c59aD13c7DBB5f66874e5Dc113afe",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0x7939b64C96a19C42114fFc505ae16B30381aD331",
+    "xt": "0x715e9828113B3EE465525d37B6301C962F54968A",
+    "gt": "0x567F19B6Bb42feec9d285c82A8b7c0D1a1dAcd82"
+  },
+  "config": {
+    "marketSymbol": "WBERA/iBERA@26SEP2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "26SEP2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "10000000",
+      "mintGtFeeRef": "3000000"
+    }
+  }
+}

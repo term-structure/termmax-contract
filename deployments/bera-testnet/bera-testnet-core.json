@@ -10,7 +10,7 @@
   "deployer": "0xE355d5D8aa52EF0FbbD037C4a3C5E6Fd659cf46B",
   "contracts": {
     "factory": "0xBaD2297Edd9E1C38Bef3bFd6B78e862e0C8d697A",
-    "vaultFactory": "0xd7eD0072B45ebdCB1CA181c0EA2a8Fc6D890F4DE",
+    "vaultFactory": "0xdC5cb61CdBC8EF3223847d5e555960B3E0Cf9167",
     "oracleAggregator": "0xa2450A147a1e03109c9ecea50590f13F1e4F10e5",
     "router": "0x6977d61868b47148E2cfd4e5E52e44818963Eb8E",
     "swapAdapter": "0xfe1dFCe548E8AEBe2964D5C0c9906FcE981d7E47",

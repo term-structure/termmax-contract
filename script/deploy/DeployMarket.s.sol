@@ -31,7 +31,6 @@ contract DeloyMarket is DeployBase {
     string network;
     uint256 deployerPrivateKey;
     address deployerAddr;
-    address adminAddr;
     address treasurerAddr;
     uint256 collateralCapForGt;
     address priceFeedOperatorAddr;
@@ -52,16 +51,16 @@ contract DeloyMarket is DeployBase {
 
         // Load network-specific configuration
         string memory privateKeyVar = string.concat(networkUpper, "_DEPLOYER_PRIVATE_KEY");
-        string memory adminVar = string.concat(networkUpper, "_ADMIN_ADDRESS");
         string memory treasurerVar = string.concat(networkUpper, "_TREASURER_ADDRESS");
 
         deployerPrivateKey = vm.envUint(privateKeyVar);
         deployerAddr = vm.addr(deployerPrivateKey);
-        adminAddr = vm.envAddress(adminVar);
         treasurerAddr = vm.envAddress(treasurerVar);
         if (
             keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("eth-mainnet"))
                 && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("arb-mainnet"))
+                && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("bnb-mainnet"))
+                && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("bera-mainnet"))
         ) {
             string memory priceFeedOperatorVar = string.concat(networkUpper, "_PRICE_FEED_OPERATOR_ADDRESS");
             priceFeedOperatorAddr = vm.envAddress(priceFeedOperatorVar);
@@ -83,6 +82,8 @@ contract DeloyMarket is DeployBase {
         if (
             keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("eth-mainnet"))
                 && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("arb-mainnet"))
+                && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("bnb-mainnet"))
+                && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("bera-mainnet"))
         ) {
             faucetAddr = vm.parseJsonAddress(json, ".contracts.faucet");
         }
@@ -100,6 +101,8 @@ contract DeloyMarket is DeployBase {
         if (
             keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("eth-mainnet"))
                 || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("arb-mainnet"))
+                || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("bnb-mainnet"))
+                || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("bera-mainnet"))
         ) {
             (markets, configs) =
                 deployMarketsMainnet(accessManagerAddr, factoryAddr, oracleAddr, deployDataPath, treasurerAddr);
@@ -133,6 +136,8 @@ contract DeloyMarket is DeployBase {
         if (
             keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("eth-mainnet"))
                 && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("arb-mainnet"))
+                && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("bnb-mainnet"))
+                && keccak256(abi.encodePacked(network)) != keccak256(abi.encodePacked("bera-mainnet"))
         ) {
             console.log("Price Feed Operator:", priceFeedOperatorAddr);
         }
@@ -151,6 +156,8 @@ contract DeloyMarket is DeployBase {
         (IMintableERC20 ft, IMintableERC20 xt, IGearingToken gt, address collateralAddr, IERC20 underlying) =
             market.tokens();
 
+        console.log("Git branch:", getGitBranch());
+        console.log("Git commit hash:", vm.toString(getGitCommitHash()));
         console.log("Market deployed at:", address(market));
         console.log("Market name:", config.marketName);
         console.log("Market symbol:", config.marketSymbol);
@@ -237,7 +244,7 @@ contract DeloyMarket is DeployBase {
         uint32 underlyingHeartbeat,
         uint256 salt,
         string memory marketSymbol
-    ) internal view returns (string memory) {
+    ) internal returns (string memory) {
         // Create JSON in parts to avoid stack too deep errors
         string memory part1 = _createJsonPart1(
             market,
@@ -262,10 +269,18 @@ contract DeloyMarket is DeployBase {
         address underlyingPriceFeedAddr,
         uint32 collateralHeartbeat,
         uint32 underlyingHeartbeat
-    ) internal view returns (string memory) {
+    ) internal returns (string memory) {
         return string(
             abi.encodePacked(
                 "{\n",
+                '  "gitInfo": {\n',
+                '    "branch": "',
+                getGitBranch(),
+                '",\n',
+                '    "commitHash": "',
+                vm.toString(getGitCommitHash()),
+                '"\n',
+                "  },\n",
                 '  "blockInfo": {\n',
                 '    "number": "',
                 vm.toString(block.number),

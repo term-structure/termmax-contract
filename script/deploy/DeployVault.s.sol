@@ -30,15 +30,15 @@ import {AccessManager} from "contracts/v1/access/AccessManager.sol";
 
 contract DeloyVault is DeployBase {
     // Initialize vault configurations with a single USDC vault
-    address assetAddr = address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
+    address assetAddr = address(0xD89721502BECE8Afc055825b95C4e4458e618cf2);
     address curator = address(0x2A58A3D405c527491Daae4C62561B949e7F87EFE);
     address guardian = address(0x2A58A3D405c527491Daae4C62561B949e7F87EFE);
     address allocator = address(0x2A58A3D405c527491Daae4C62561B949e7F87EFE);
-    string name = "TermMax USDC Prime";
-    string symbol = "TMX-USDC-PRIME";
-    uint256 timelock = 1 days;
+    string name = "TermMax Honey Vault";
+    string symbol = "TMX-HONEY";
+    uint256 timelock = 1 seconds;
     uint256 maxCapacity = 50000000e6;
-    uint64 performanceFeeRate = 0;
+    uint64 performanceFeeRate = 1e7;
 
     // Network-specific config loaded from environment variables
     string network;

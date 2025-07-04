@@ -22,6 +22,7 @@ if [ "$#" -lt 2 ]; then
     echo "  --broadcast     Broadcast transactions (default: dry run)"
     echo "  --verify        Enable contract verification"
     echo "  --tenderly      Enable verification on Tenderly"
+    echo "  --resume        Resume a previously interrupted broadcast"
     echo "  --debug         Show complete command with sensitive information (for debugging)"
     exit 1
 fi
@@ -46,6 +47,7 @@ fi
 BROADCAST=""
 VERIFY=""
 TENDERLY=""
+RESUME=""
 DEBUG=""
 
 # Parse remaining options
@@ -61,6 +63,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --tenderly)
             TENDERLY="yes"
+            shift
+            ;;
+        --resume)
+            RESUME="--resume"
             shift
             ;;
         --debug)
@@ -89,12 +95,12 @@ esac
 # If deploying, validate deployment type
 if [ "$OPERATION" = "deploy" ]; then
     case $TYPE in
-        "access-manager"|"core"|"market"|"order"|"vault"|"pretmx"|"adapters")
+        "access-manager"|"core"|"market"|"order"|"vault"|"pretmx"|"adapters"|"vault-factory")
             echo "Deployment type: $TYPE"
             ;;
         *)
             echo "Unsupported deployment type: $TYPE"
-            echo "Supported deployment types: access-manager, core, market, order, vault, pretmx, adapters"
+            echo "Supported deployment types: access-manager, core, market, order, vault, pretmx, adapters, vault-factory"
             exit 1
             ;;
     esac
@@ -181,6 +187,8 @@ if [ "$OPERATION" = "deploy" ]; then
     # Capitalize first letter of type for script name
     if [ "$TYPE" = "access-manager" ]; then
         SCRIPT_NAME="DeployAccessManager"
+    elif [ "$TYPE" = "vault-factory" ]; then
+        SCRIPT_NAME="DeployVaultFactory"
     else
         TYPE_CAPITALIZED="$(tr '[:lower:]' '[:upper:]' <<< ${TYPE:0:1})${TYPE:1}"
         SCRIPT_NAME="Deploy${TYPE_CAPITALIZED}"
@@ -238,6 +246,7 @@ echo "RPC URL: $RPC_MASKED"
 echo "Admin Address: $ADMIN_ADDRESS"
 
 echo "Mode: ${BROADCAST:+Live Broadcast}${BROADCAST:-Dry Run}"
+echo "Resume: ${RESUME:+Enabled}${RESUME:-Disabled}"
 echo "Verification: ${VERIFY:+Enabled}${VERIFY:-Disabled}"
 echo "Tenderly Verification: ${TENDERLY:+Enabled}${TENDERLY:-Disabled}"
 echo "Debug Mode: ${DEBUG:+Enabled}${DEBUG:-Disabled}"
@@ -272,6 +281,10 @@ if [ ! -z "$BROADCAST" ]; then
     if [ ! -z "$TENDERLY" ]; then
         FORGE_CMD="$FORGE_CMD --verifier-url $TENDERLY_VERIFIER_URL --etherscan-api-key $TENDERLY_ACCESS_KEY"
     fi
+fi
+
+if [ ! -z "$RESUME" ]; then
+    FORGE_CMD="$FORGE_CMD $RESUME"
 fi
 
 if [ ! -z "$VERIFY" ]; then
