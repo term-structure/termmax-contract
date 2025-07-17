@@ -23,20 +23,6 @@ contract DeployWstEthPricefeed is Script {
         console.log("WstEth Pricefeed deployed at:", address(wstEthPriceFeed));
         (, int256 answer,,,) = wstEthPriceFeed.latestRoundData();
         console.log("latestAnswer:", answer);
-
-        address accessManagerAddress = address(0xDA4aAF85Bb924B53DCc2DFFa9e1A9C2Ef97aCFDF);
-        AccessManager accessManager = AccessManager(accessManagerAddress);
-        address oracleAggregator = 0xE3a31690392E8E18DC3d862651C079339E2c1ADE; // Mainnet Oracle Aggregator address
-        accessManager.submitPendingOracle(
-            IOracle(oracleAggregator),
-            wstETHAddress,
-            IOracle.Oracle({
-                aggregator: AggregatorV3Interface(address(wstEthPriceFeed)),
-                backupAggregator: AggregatorV3Interface(address(0)),
-                heartbeat: 1 hours
-            })
-        );
-
         vm.stopBroadcast();
     }
 }
