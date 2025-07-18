@@ -14,6 +14,7 @@ if [ "$#" -lt 2 ]; then
     echo "     - deploy:vault           - Deploy Vault contracts"
     echo "     - deploy:pretmx          - Deploy PreTMX token contract"
     echo "     - deploy:adapters        - Deploy Adapters contracts"
+    echo "     - deploy:price-feed-factory-v1 - Deploy PriceFeedFactory V1 contract"
     echo ""
     echo "  2. Script Commands:"
     echo "     - script:<script-name>   - Run a custom script (e.g., script:GrantRoles, script:SubmitOracles)"
@@ -95,12 +96,12 @@ esac
 # If deploying, validate deployment type
 if [ "$OPERATION" = "deploy" ]; then
     case $TYPE in
-        "access-manager"|"core"|"market"|"order"|"vault"|"pretmx"|"adapters"|"vault-factory")
+        "access-manager"|"core"|"market"|"order"|"vault"|"pretmx"|"adapters"|"vault-factory"|"price-feed-factory-v1")
             echo "Deployment type: $TYPE"
             ;;
         *)
             echo "Unsupported deployment type: $TYPE"
-            echo "Supported deployment types: access-manager, core, market, order, vault, pretmx, adapters, vault-factory"
+            echo "Supported deployment types: access-manager, core, market, order, vault, pretmx, adapters, vault-factory, price-feed-factory-v1"
             exit 1
             ;;
     esac
@@ -189,6 +190,8 @@ if [ "$OPERATION" = "deploy" ]; then
         SCRIPT_NAME="DeployAccessManager"
     elif [ "$TYPE" = "vault-factory" ]; then
         SCRIPT_NAME="DeployVaultFactory"
+    elif [ "$TYPE" = "price-feed-factory-v1" ]; then
+        SCRIPT_NAME="DeployPriceFeedFactoryV1"
     else
         TYPE_CAPITALIZED="$(tr '[:lower:]' '[:upper:]' <<< ${TYPE:0:1})${TYPE:1}"
         SCRIPT_NAME="Deploy${TYPE_CAPITALIZED}"

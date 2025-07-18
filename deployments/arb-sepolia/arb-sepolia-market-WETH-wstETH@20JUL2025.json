@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0x3b46227b402393fefe32cf90325b4082bc97e2d8"
+  },
+  "blockInfo": {
+    "number": "8791044",
+    "timestamp": "1752847616"
+  },
+  "market": "0x3cd582f1F834943e8d4F4d9Cf5a59A7b7490E968",
+  "collateral": {
+    "address": "0xdD9e964C4C1C9d6903a865eEEc72e5B13D9dC643",
+    "symbol": "wstETH",
+    "priceFeed": "0xc83Dc554D4C37a7c923f42509774f6d811E63ef5",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0xf12a10232455E2F22aBc0B688e9C458E1cD14338",
+    "symbol": "WETH",
+    "priceFeed": "0x4bf5B75bbddcb1BC08e22FCd2b0Da29214F78A3E",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0xBa680212541166269510b69FF123896eb7C6F9b1",
+    "xt": "0xb38eAf790373a09c97c4117fcE55071707bd5692",
+    "gt": "0x6Fb8d7605B22574Dda884c96a7F604A2c40983aE"
+  },
+  "config": {
+    "marketSymbol": "WETH/wstETH@30MAY2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "20JUL2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "1000000",
+      "mintGtFeeRef": "400000"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "network": "eth-sepolia",
+  "deployedAt": "1752720840",
+  "gitBranch": "deployment",
+  "gitCommitHash": "0x0x3b46227b402393fefe32cf90325b4082bc97e2d8",
+  "blockInfo": {
+    "number": "8780576",
+    "timestamp": "1752720840"
+  },
+  "deployer": "0xE355d5D8aa52EF0FbbD037C4a3C5E6Fd659cf46B",
+  "contracts": {
+    "priceFeedFactory": "0xEAA7f1B2Fb430f8AE9eBe0556edF6E6376f047E9"
+  }
+}
