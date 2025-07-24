@@ -59,7 +59,7 @@ contract FuzzActionsTest is Test {
     address taker = vm.randomAddress();
     address treasurer = vm.randomAddress();
 
-    string path = string.concat(vm.projectRoot(), "/test/testdata/fuzzSwap/v2.json");
+    string path = string.concat(vm.projectRoot(), "/test/testdata/fuzzSwap/v1plus.json");
 
     function setUp() public {}
 
