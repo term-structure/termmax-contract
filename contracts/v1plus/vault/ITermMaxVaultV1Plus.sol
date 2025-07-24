@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import {IERC4626} from "@openzeppelin/contracts/interfaces/IERC4626.sol";
 import {PendingAddress, PendingUint192} from "../../v1/lib/PendingLib.sol";
 import {VaultInitialParamsV1Plus} from "../storage/TermMaxStorageV1Plus.sol";
+
 
 /**
  * @title ITermMaxVaultV1Plus
@@ -10,7 +12,7 @@ import {VaultInitialParamsV1Plus} from "../storage/TermMaxStorageV1Plus.sol";
  * @dev This interface defines the core functionality for vault operations including
  *      initialization, APY management, and pending parameter updates with timelock mechanism
  */
-interface ITermMaxVaultV1Plus {
+interface ITermMaxVaultV1Plus is IERC4626 {
     /**
      * @notice Initializes the vault with the provided parameters
      * @dev This function should only be called once during contract deployment
