@@ -845,4 +845,8 @@ contract TermMaxVaultV1Plus is
     function withdrawQueueLength() external view virtual returns (uint256) {
         revert VaultErrorsV1Plus.WithdrawalQueueNoLongerSupported();
     }
+
+    function getVersion() external view virtual returns (string memory) {
+        return "1.1.0";
+    }
 }

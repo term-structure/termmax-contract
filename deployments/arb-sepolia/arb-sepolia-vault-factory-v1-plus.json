@@ -1,15 +1,15 @@
 {
   "network": "arb-sepolia",
-  "deployedAt": "1753343045",
+  "deployedAt": "1753352183",
   "gitBranch": "feat/v1.1.0",
-  "gitCommitHash": "0x0x1279c587f3521cdc16cd7f3d5fc5e09f006fb2bc",
+  "gitCommitHash": "0x0xd5964fe47eea122090e23f3a5f30bee54fe928c6",
   "blockInfo": {
-    "number": "8830699",
-    "timestamp": "1753343045"
+    "number": "8831460",
+    "timestamp": "1753352183"
   },
   "deployer": "0xE355d5D8aa52EF0FbbD037C4a3C5E6Fd659cf46B",
   "contracts": {
-    "vaultFactoryV1Plus": "0x52bcBa6FF60d1f4f5b2460Ed2c1Ed278fCdfA776",
-    "vaultImplementationV1Plus": "0xaC19B3feB62681D004F667881a1afC65b36DEd03"
+    "vaultFactoryV1Plus": "0x0ACDCE7846656eE7c8Bd58f282dfA8C29B02605E",
+    "vaultImplementationV1Plus": "0xCF2e068570e632837C078c5bAF35200D28bFed56"
   }
 }
