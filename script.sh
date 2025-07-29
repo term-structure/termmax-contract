@@ -12,6 +12,8 @@ if [ "$#" -lt 2 ]; then
     echo "     - deploy:market          - Deploy Market contracts"
     echo "     - deploy:order           - Deploy Order contracts"
     echo "     - deploy:vault           - Deploy Vault contracts"
+    echo "     - deploy:vault-v1-plus   - Deploy Vault V1 Plus contracts"
+    echo "     - deploy:vault-factory-v1-plus - Deploy Vault Factory V1 Plus contract"
     echo "     - deploy:pretmx          - Deploy PreTMX token contract"
     echo "     - deploy:adapters        - Deploy Adapters contracts"
     echo "     - deploy:price-feed-factory-v1 - Deploy PriceFeedFactory V1 contract"
@@ -96,12 +98,12 @@ esac
 # If deploying, validate deployment type
 if [ "$OPERATION" = "deploy" ]; then
     case $TYPE in
-        "access-manager"|"core"|"market"|"order"|"vault"|"pretmx"|"adapters"|"vault-factory"|"price-feed-factory-v1")
+        "access-manager"|"core"|"market"|"order"|"vault"|"vault-v1-plus"|"vault-factory-v1-plus"|"pretmx"|"adapters")
             echo "Deployment type: $TYPE"
             ;;
         *)
             echo "Unsupported deployment type: $TYPE"
-            echo "Supported deployment types: access-manager, core, market, order, vault, pretmx, adapters, vault-factory, price-feed-factory-v1"
+            echo "Supported deployment types: access-manager, core, market, order, vault, vault-v1-plus, vault-factory-v1-plus, pretmx, adapters"
             exit 1
             ;;
     esac
@@ -188,10 +190,10 @@ if [ "$OPERATION" = "deploy" ]; then
     # Capitalize first letter of type for script name
     if [ "$TYPE" = "access-manager" ]; then
         SCRIPT_NAME="DeployAccessManager"
-    elif [ "$TYPE" = "vault-factory" ]; then
-        SCRIPT_NAME="DeployVaultFactory"
-    elif [ "$TYPE" = "price-feed-factory-v1" ]; then
-        SCRIPT_NAME="DeployPriceFeedFactoryV1"
+    elif [ "$TYPE" = "vault-v1-plus" ]; then
+        SCRIPT_NAME="DeployVaultV1Plus"
+    elif [ "$TYPE" = "vault-factory-v1-plus" ]; then
+        SCRIPT_NAME="DeployVaultFactoryV1Plus"
     else
         TYPE_CAPITALIZED="$(tr '[:lower:]' '[:upper:]' <<< ${TYPE:0:1})${TYPE:1}"
         SCRIPT_NAME="Deploy${TYPE_CAPITALIZED}"

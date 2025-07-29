@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import {IPAllActionV3} from "@pendle/core-v2/contracts/interfaces/IPAllActionV3.sol";
 import {IPMarket, IPPrincipalToken, IPYieldToken} from "@pendle/core-v2/contracts/interfaces/IPMarket.sol";
-import {PendleHelper} from "../../../v2/extensions/pendle/PendleHelper.sol";
+import {PendleHelper} from "../../../v1plus/extensions/pendle/PendleHelper.sol";
 import "./ERC20SwapAdapterV2.sol";
 
 /**
@@ -11,7 +11,7 @@ import "./ERC20SwapAdapterV2.sol";
  * @author Term Structure Labs
  */
 contract PendleSwapV3AdapterV2 is ERC20SwapAdapterV2, PendleHelper {
-    using TransferUtilsV2 for IERC20;
+    using TransferUtilsV1Plus for IERC20;
     using Math for uint256;
 
     IPAllActionV3 public immutable router;

@@ -3,9 +3,9 @@ pragma solidity ^0.8.0;
 
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
-import {TransferUtilsV2} from "../../../v2/lib/TransferUtilsV2.sol";
+import {TransferUtilsV1Plus} from "../../../v1plus/lib/TransferUtilsV1Plus.sol";
 import {ISwapAdapter} from "../ISwapAdapter.sol";
-import {OnlyProxyCall} from "../../../v2/lib/OnlyProxyCall.sol";
+import {OnlyProxyCall} from "../../../v1plus/lib/OnlyProxyCall.sol";
 
 /**
  * @title TermMax ERC20SwapAdapter V2
@@ -13,7 +13,7 @@ import {OnlyProxyCall} from "../../../v2/lib/OnlyProxyCall.sol";
  * @notice This contract is an abstract base for ERC20 swap adapters in the TermMax protocol.
  */
 abstract contract ERC20SwapAdapterV2 is ISwapAdapter, OnlyProxyCall {
-    using TransferUtilsV2 for IERC20;
+    using TransferUtilsV1Plus for IERC20;
 
     /// @notice Error for less than min token out
     /// @dev Revert when the actual output token amount is less than the expected minimum

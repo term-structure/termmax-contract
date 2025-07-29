@@ -43,7 +43,7 @@ contract DeployAdapters is DeployBase {
     AccessManager accessManager;
     ITermMaxRouter router;
     UniswapV3AdapterV2 uniswapV3Adapter;
-    OdosV2AdapterV2 odosV2Adapter;
+    OdosV2AdapterV2 OdosV2Adapter;
     PendleSwapV3AdapterV2 pendleSwapV3Adapter;
     ERC4626VaultAdapterV2 vaultAdapter;
 
@@ -98,7 +98,7 @@ contract DeployAdapters is DeployBase {
         //         || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("arb-mainnet"))
         //         || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("bnb-mainnet"))
         // ) {
-        (uniswapV3Adapter, odosV2Adapter, pendleSwapV3Adapter, vaultAdapter) =
+        (uniswapV3Adapter, OdosV2Adapter, pendleSwapV3Adapter, vaultAdapter) =
             deployAdapters(accessManagerAddr, routerAddr, uniswapV3RouterAddr, odosV2RouterAddr, pendleSwapV3RouterAddr);
         // } else {
         //     revert("This script is only for mainnet deployments");
@@ -154,8 +154,8 @@ contract DeployAdapters is DeployBase {
                     '    "uniswapV3Adapter": "',
                     vm.toString(address(uniswapV3Adapter)),
                     '",\n',
-                    '    "odosV2Adapter": "',
-                    vm.toString(address(odosV2Adapter)),
+                    '    "OdosV2Adapter": "',
+                    vm.toString(address(OdosV2Adapter)),
                     '",\n',
                     '    "pendleSwapV3Adapter": "',
                     vm.toString(address(pendleSwapV3Adapter)),

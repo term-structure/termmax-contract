@@ -36,7 +36,7 @@ contract DeployCore is DeployBase {
     address adminAddr;
     address accessManagerAddr;
     address uniswapV3RouterAddr;
-    address odosV2RouterAddr;
+    address odosV1PlusRouterAddr;
     address pendleSwapV3RouterAddr;
     uint256 oracleTimelock;
 
