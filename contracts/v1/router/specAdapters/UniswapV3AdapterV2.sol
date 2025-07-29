@@ -9,7 +9,7 @@ import "./ERC20SwapAdapterV2.sol";
  * @author Term Structure Labs
  */
 contract UniswapV3AdapterV2 is ERC20SwapAdapterV2 {
-    using TransferUtilsV2 for IERC20;
+    using TransferUtilsV1Plus for IERC20;
     using Math for uint256;
 
     ISwapRouter public immutable router;

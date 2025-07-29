@@ -29,7 +29,7 @@ interface IOdosRouterV2 {
  * @author Term Structure Labs
  */
 contract OdosV2AdapterV2 is ERC20SwapAdapterV2 {
-    using TransferUtilsV2 for IERC20;
+    using TransferUtilsV1Plus for IERC20;
     using Math for uint256;
 
     IOdosRouterV2 public immutable router;

@@ -33,6 +33,14 @@ import {
     VaultInitialParams
 } from "contracts/v1/storage/TermMaxStorage.sol";
 import {ERC4626VaultAdapterV2} from "contracts/v1/router/specAdapters/ERC4626VaultAdapterV2.sol";
+import {
+    TermMaxVaultFactoryV1Plus,
+    ITermMaxVaultFactoryV1Plus
+} from "contracts/v1plus/factory/TermMaxVaultFactoryV1Plus.sol";
+import {TermMaxVaultV1Plus} from "contracts/v1plus/vault/TermMaxVaultV1Plus.sol";
+import {OrderManagerV1Plus} from "contracts/v1plus/vault/OrderManagerV1Plus.sol";
+import {ITermMaxVaultV1Plus} from "contracts/v1plus/vault/ITermMaxVaultV1Plus.sol";
+import {VaultInitialParamsV1Plus} from "contracts/v1plus/storage/TermMaxStorageV1Plus.sol";
 import {OdosV2AdapterV2} from "contracts/v1/router/specAdapters/OdosV2AdapterV2.sol";
 import {PendleSwapV3AdapterV2} from "contracts/v1/router/specAdapters/PendleSwapV3AdapterV2.sol";
 import {UniswapV3AdapterV2} from "contracts/v1/router/specAdapters/UniswapV3AdapterV2.sol";
@@ -58,6 +66,12 @@ contract DeployBase is Script {
         OrderManager orderManager = new OrderManager();
         TermMaxVault implementation = new TermMaxVault(address(orderManager));
         vaultFactory = new VaultFactory(address(implementation));
+    }
+
+    function deployVaultFactoryV1Plus() public returns (ITermMaxVaultFactoryV1Plus vaultFactoryV1Plus) {
+        OrderManagerV1Plus orderManager = new OrderManagerV1Plus();
+        TermMaxVaultV1Plus implementation = new TermMaxVaultV1Plus(address(orderManager));
+        vaultFactoryV1Plus = new TermMaxVaultFactoryV1Plus(address(implementation));
     }
 
     function deployOracleAggregator(address admin, uint256 timelock) public returns (OracleAggregator oracle) {
@@ -405,6 +419,37 @@ contract DeployBase is Script {
             performanceFeeRate: performanceFeeRate
         });
         vault = TermMaxVault(vaultFactory.createVault(initialParams, 0));
+    }
+
+    function deployVaultV1Plus(
+        address factoryAddr,
+        address accessManagerAddr,
+        address curator,
+        address guardian,
+        uint256 timelock,
+        address assetAddr,
+        uint256 maxCapacity,
+        string memory name,
+        string memory symbol,
+        uint64 performanceFeeRate,
+        uint64 minApy,
+        uint64 minIdleFundRate
+    ) public returns (ITermMaxVaultV1Plus vault) {
+        ITermMaxVaultFactoryV1Plus vaultFactory = ITermMaxVaultFactoryV1Plus(factoryAddr);
+        VaultInitialParamsV1Plus memory initialParams = VaultInitialParamsV1Plus({
+            admin: accessManagerAddr,
+            curator: curator,
+            guardian: guardian,
+            timelock: timelock,
+            asset: IERC20(assetAddr),
+            maxCapacity: maxCapacity,
+            name: name,
+            symbol: symbol,
+            performanceFeeRate: performanceFeeRate,
+            minApy: minApy,
+            minIdleFundRate: minIdleFundRate
+        });
+        vault = ITermMaxVaultV1Plus(vaultFactory.createVault(initialParams, 0));
     }
 
     function deployMarketViewer() public returns (MarketViewer marketViewer) {

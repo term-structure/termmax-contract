@@ -36,7 +36,7 @@ contract UpgradeRouterForRepayingGt is DeployBase {
     address adminAddr;
     address accessManagerAddr;
     address uniswapV3RouterAddr;
-    address odosV2RouterAddr;
+    address odosV1PlusRouterAddr;
     address pendleSwapV3RouterAddr;
     address routerAddr;
 

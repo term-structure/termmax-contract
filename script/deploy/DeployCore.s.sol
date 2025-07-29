@@ -36,7 +36,7 @@ contract DeployCore is DeployBase {
     address adminAddr;
     address accessManagerAddr;
     address uniswapV3RouterAddr;
-    address odosV2RouterAddr;
+    address odosV1PlusRouterAddr;
     address pendleSwapV3RouterAddr;
     uint256 oracleTimelock;
 
@@ -71,11 +71,11 @@ contract DeployCore is DeployBase {
                 || keccak256(abi.encodePacked(network)) == keccak256(abi.encodePacked("arb-mainnet"))
         ) {
             string memory uniswapV3RouterVar = string.concat(networkUpper, "_UNISWAP_V3_ROUTER_ADDRESS");
-            string memory odosV2RouterVar = string.concat(networkUpper, "_ODOS_V2_ROUTER_ADDRESS");
+            string memory odosV1PlusRouterVar = string.concat(networkUpper, "_ODOS_V1Plus_ROUTER_ADDRESS");
             string memory pendleSwapV3RouterVar = string.concat(networkUpper, "_PENDLE_SWAP_V3_ROUTER_ADDRESS");
             string memory oracleTimelockVar = string.concat(networkUpper, "_ORACLE_TIMELOCK");
             uniswapV3RouterAddr = vm.envAddress(uniswapV3RouterVar);
-            odosV2RouterAddr = vm.envAddress(odosV2RouterVar);
+            odosV1PlusRouterAddr = vm.envAddress(odosV1PlusRouterVar);
             pendleSwapV3RouterAddr = vm.envAddress(pendleSwapV3RouterVar);
             oracleTimelock = vm.envUint(oracleTimelockVar);
         }
@@ -109,7 +109,7 @@ contract DeployCore is DeployBase {
                 pendleSwapV3Adapter,
                 vaultAdapter
             ) = deployCoreMainnet(
-                accessManagerAddr, uniswapV3RouterAddr, odosV2RouterAddr, pendleSwapV3RouterAddr, oracleTimelock
+                accessManagerAddr, uniswapV3RouterAddr, odosV1PlusRouterAddr, pendleSwapV3RouterAddr, oracleTimelock
             );
         } else {
             (factory, vaultFactory, oracleAggregator, router, swapAdapter, faucet, marketViewer) =
