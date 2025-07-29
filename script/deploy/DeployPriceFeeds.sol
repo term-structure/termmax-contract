@@ -4,31 +4,30 @@ pragma solidity ^0.8.27;
 import {Script} from "forge-std/Script.sol";
 import {console} from "forge-std/console.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
-import {TermMaxPriceFeedFactory} from "contracts/factory/TermMaxPriceFeedFactory.sol";
+import {TermMaxPriceFeedFactoryV1Plus} from "contracts//v1plus/factory/TermMaxPriceFeedFactoryV1Plus.sol";
 
 contract DeployPriceFeeds is Script {
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("ETH_MAINNET_DEPLOYER_PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
-        TermMaxPriceFeedFactory priceFeedFactory = new TermMaxPriceFeedFactory();
+        TermMaxPriceFeedFactoryV1Plus priceFeedFactory = new TermMaxPriceFeedFactoryV1Plus();
 
-        console.log("PriceFeedFactory deployed at", address(priceFeedFactory));
-        // pendle deployments: https://github.com/pendle-finance/pendle-core-v2-public/blob/main/deployments/1-core.json
+        console.log("TermMaxPriceFeedFactory deployed at", address(priceFeedFactory));
+        // pendle deployments: https://github.com/pendle-finance/pendle-core-/v1plus-public/blob/main/deployments/1-core.json
         address pendlePYLpOracle = 0x9a9Fa8338dd5E5B2188006f1Cd2Ef26d921650C2;
         address pufferEthOracle;
         {
+            address pufETH = 0xD9A442856C234a39a81a089C06451EBAa4306a72;
             // chainlink(pufETH/ETH): https://data.chain.link/feeds/ethereum/mainnet/pufeth-eth
             // heartBeat: 86400 (24hr)
             address pufferEthToEth = 0xDe3f7Dd92C4701BCf59F47235bCb61e727c45f80;
             // chainlink(ETH/USD): https://data.chain.link/feeds/ethereum/mainnet/eth-usd
             // heartBeat: 3600 (1hr)
             address ethToUsd = 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419;
-            address pufETH = 0xD9A442856C234a39a81a089C06451EBAa4306a72;
             // new price feed heartBeat = max(3600, 86400) = 86400 (24hr)
             AggregatorV3Interface pufferEthFeed =
                 AggregatorV3Interface(priceFeedFactory.createPriceFeedConverter(pufferEthToEth, ethToUsd, pufETH));
             (, int256 answer,,,) = pufferEthFeed.latestRoundData();
-            console.log("pufferEth price feed description", pufferEthFeed.description());
             console.log("pufferEth price feed address", address(pufferEthFeed));
             console.log("pufferEth last answer", answer);
             pufferEthOracle = address(pufferEthFeed);
@@ -45,7 +44,6 @@ contract DeployPriceFeeds is Script {
                 priceFeedFactory.createPTWithPriceFeed(pendlePYLpOracle, pt_market, 900, susdeToUsd)
             );
             (, int256 answer,,,) = ptFeed.latestRoundData();
-            console.log("pt_sUsde_29MAY2025 price feed description", ptFeed.description());
             console.log("pt_sUsde_29MAY2025 price feed address", address(ptFeed));
             console.log("pt_sUsde_29MAY2025 last answer", answer);
         }
@@ -60,7 +58,6 @@ contract DeployPriceFeeds is Script {
             AggregatorV3Interface usdcPlusFeed =
                 AggregatorV3Interface(priceFeedFactory.createPriceFeedWithERC4626(usdcToUsd, USUALUSDCPlusVault));
             (, int256 answer,,,) = usdcPlusFeed.latestRoundData();
-            console.log("USUALUSDC+ price feed description", usdcPlusFeed.description());
             console.log("USUALUSDC+ price feed address", address(usdcPlusFeed));
             console.log("USUALUSDC+ last answer", answer);
         }
@@ -75,7 +72,6 @@ contract DeployPriceFeeds is Script {
             AggregatorV3Interface wethFeed =
                 AggregatorV3Interface(priceFeedFactory.createPriceFeedWithERC4626(wethToUsd, MCwETHVault));
             (, int256 answer,,,) = wethFeed.latestRoundData();
-            console.log("MCwETH price feed description", wethFeed.description());
             console.log("MCwETH price feed address", address(wethFeed));
             console.log("MCwETH last answer", answer);
         }
@@ -90,7 +86,6 @@ contract DeployPriceFeeds is Script {
             AggregatorV3Interface gtWETHFeed =
                 AggregatorV3Interface(priceFeedFactory.createPriceFeedWithERC4626(wethToUsd, gtWETHVault));
             (, int256 answer,,,) = gtWETHFeed.latestRoundData();
-            console.log("gtWETH price feed description", gtWETHFeed.description());
             console.log("gtWETH price feed address", address(gtWETHFeed));
             console.log("gtWETH last answer", answer);
         }
@@ -106,7 +101,6 @@ contract DeployPriceFeeds is Script {
                 )
             );
             (, int256 answer,,,) = ptFeed.latestRoundData();
-            console.log("pt_pufETH_26JUN2025 price feed description", ptFeed.description());
             console.log("pt_pufETH_26JUN2025 price feed address", address(ptFeed));
             console.log("pt_pufETH_26JUN2025 last answer", answer);
         }
@@ -121,7 +115,6 @@ contract DeployPriceFeeds is Script {
             AggregatorV3Interface usdeFeed =
                 AggregatorV3Interface(priceFeedFactory.createPriceFeedWithERC4626(usdeToUsd, eUSDeVault));
             (, int256 answer,,,) = usdeFeed.latestRoundData();
-            console.log("eUSDe price feed description", usdeFeed.description());
             console.log("eUSDe price feed address", address(usdeFeed));
             console.log("eUSDe last answer", answer);
         }
@@ -139,7 +132,6 @@ contract DeployPriceFeeds is Script {
                 )
             );
             (, int256 answer,,,) = usd0PlusPlusFeed.latestRoundData();
-            console.log("PT_USD0PlusPlus_26JUN2025 price feed description", usd0PlusPlusFeed.description());
             console.log("PT_USD0PlusPlus_26JUN2025_market price feed address", address(usd0PlusPlusFeed));
             console.log("PT_USD0PlusPlus_26JUN2025_market last answer", answer);
         }
@@ -154,7 +146,6 @@ contract DeployPriceFeeds is Script {
             AggregatorV3Interface usdcFeed =
                 AggregatorV3Interface(priceFeedFactory.createPriceFeedWithERC4626(usdcToUsd, upUSDCVault));
             (, int256 answer,,,) = usdcFeed.latestRoundData();
-            console.log("upUSDC price feed description", usdcFeed.description());
             console.log("upUSDC price feed address", address(usdcFeed));
             console.log("upUSDC last answer", answer);
         }
@@ -169,7 +160,6 @@ contract DeployPriceFeeds is Script {
             AggregatorV3Interface usualFeed =
                 AggregatorV3Interface(priceFeedFactory.createPriceFeedWithERC4626(usualToUsd, usualxVault));
             (, int256 answer,,,) = usualFeed.latestRoundData();
-            console.log("usualx price feed description", usualFeed.description());
             console.log("usualx price feed address", address(usualFeed));
             console.log("usualx last answer", answer);
         }
