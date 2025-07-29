@@ -1,0 +1,22 @@
+{
+  "network": "eth-sepolia",
+  "deployedAt": "1753777932",
+  "gitBranch": "deployment",
+  "gitCommitHash": "0x0xc2c325c84fa3f67a2dbfb88024d10399fb16e023",
+  "blockInfo": {
+    "number": "8866887",
+    "timestamp": "1753777932"
+  },
+  "deployer": "0xE355d5D8aa52EF0FbbD037C4a3C5E6Fd659cf46B",
+  "admin": "0x81f314f70702Bbe89FEd0F2cFe6841950275E0b7",
+  "contracts": {
+    "preTMX": {
+      "address": "0x7Ae5d2049d6EAC13D288929F71993E90e6806919",
+      "name": "Pre TermMax Token",
+      "symbol": "pTMX",
+      "totalSupply": "1000000000000000000000000000",
+      "owner": "0x81f314f70702Bbe89FEd0F2cFe6841950275E0b7",
+      "transferRestricted": true
+    }
+  }
+}
