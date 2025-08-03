@@ -37,7 +37,7 @@ contract UpdateGtCapacity is DeployBase {
     address public constant MARKET_ADDRESS = 0x46F6a23B697FFFd8f5D66B1DE99A2933bB6e001D; // Replace with actual market address
 
     // The new collateral capacity value (in wei) to set for the GT
-    uint256 public constant NEW_GT_CAPACITY = 10000000e18; // Example: 1,000 tokens with 18 decimals
+    uint256 public constant NEW_GT_CAPACITY = 20000000e18; // Example: 1,000 tokens with 18 decimals
 
     // ===============================================================
 

@@ -121,7 +121,11 @@ The proper sequence for setting up the TermMax system is as follows:
    ```bash
    ./script.sh <network> deploy:vault --broadcast
    ```
-
+9. **Update GT Capacity**: Change MARKET_ADDRESS and NEW_GT_CAPACITY values.
+```bash
+ ./script.sh eth-mainnet script:UpdateGtCapacity
+ ./script.sh eth-mainnet script:UpdateGtCapacity --broadcast
+```
 Following this sequence ensures that contracts are deployed with the correct dependency chain and permissions setup.
 
 ## PreTMX Token Deployment
