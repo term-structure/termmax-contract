@@ -33,14 +33,14 @@
         "priceFeedAddr": "0xdDb6F90fFb4d3257dd666b69178e5B3c5Bf41136",
         "backupPriceFeedAddr": "0x24CFEf73A30b2CEEC23d3659fA98B491D996F152",
         "heartBeat": "86400",
-        "name": "PT-sUSDE-31JUL2025",
-        "symbol": "PT-sUSDE-31JUL2025",
+        "name": "PT-sUSDE-25SEP2025",
+        "symbol": "PT-sUSDE-25SEP2025",
         "decimals": "18",
         "initialPrice": "98000000",
         "gtKeyIdentifier": "GearingTokenWithERC20"
       },
-      "marketName": "USDC/PT-sUSDE-31JUL2025@01AUG2025",
-      "marketSymbol": "USDC/PT-sUSDE-31JUL2025@01AUG2025"
+      "marketName": "USDC/PT-sUSDE-25SEP2025@01SEP2025",
+      "marketSymbol": "USDC/PT-sUSDE-25SEP2025@01SEP2025"
     }
   }
 }

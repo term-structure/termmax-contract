@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x26b17abc3bb32de6ab0525ef2dd350da0fa6d288"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "8916711",
+    "timestamp": "1754380284"
+  },
+  "vaultInfo": {
+    "name": "Edge-testnet-Vault",
+    "symbol": "Edge-testnet-Vault",
+    "address": "0x3b4B40c0306f5Bf37827Bf53D6745207F262FAb5",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 10000000,
+    "minApy": 0,
+    "minIdleFundRate": 0,
+    "maxCapacity": "50000000000000",
+    "timelock": 86400,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0x71752Dc37b36A597dDf3dF5dcb56e67aF34d0377",
+    "guardian": "0x17538a672437aB77F3811559d3caA91bE38d8F3c",
+  }
+}

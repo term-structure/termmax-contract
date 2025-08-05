@@ -12,6 +12,7 @@
   "contracts": {
     "factory": "0xC0339131b13cB78FC13Eee1F2f20aE2aE98F1d03",
     "vaultFactory": "0xE98B34359852A5bbC48C59AF5319Ae83961e74eD",
+    "vaultFactoryV1Plus": "0x6025550717AFdBAe1820Fcd3558E3C6C7C288A7F",
     "oracleAggregator": "0x614eAFf71890b3C2677aDb111252EE1BE5A53EF7",
     "router": "0x2F68071baC2bE3332c8107Dd15a76f7230F34013",
     "swapAdapter": "0xDafd984bBfD06c5D394a18E00727448cf8de6D8e",
