@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x3b2e1664c39aa3b744bc0a5118c1186137999cd3"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "8926384",
+    "timestamp": "1754496888"
+  },
+  "vaultInfo": {
+    "name": "KeyRock-testnet-Vault",
+    "symbol": "KeyRock-testnet-Vault",
+    "address": "0x7DcE42830A55D0923b042B03E9dE68Ee679f7015",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 10000000,
+    "minApy": 0,
+    "minIdleFundRate": 0,
+    "maxCapacity": "50000000000000",
+    "timelock": 86400,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0x3406875997ECB92700c695B0A3125BCCe64CCBed",
+    "guardian": "0x652Ed04CC2e4982F4Fe951Fc130Df21495dBC55a",
+  }
+}
