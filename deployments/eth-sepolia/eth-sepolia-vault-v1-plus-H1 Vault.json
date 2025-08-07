@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x8d86b2986d5a2aed9bc2075f8575f3a2556dd667"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "8933339",
+    "timestamp": "1754580780"
+  },
+  "vaultInfo": {
+    "name": "H1 Vault",
+    "symbol": "H1 Vault",
+    "address": "0xff891Fba1162a47ba0d0B23108E6A3050fa9D650",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 10000000,
+    "minApy": 0,
+    "minIdleFundRate": 0,
+    "maxCapacity": "50000000000000",
+    "timelock": 60,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0x5eC5CB94D271E59f5dfF5A574851ba84Ee713f3D",
+    "guardian": "0xaAC1EDD499Dc45388dBb43aAA1663A70D43746F3",
+  }
+}

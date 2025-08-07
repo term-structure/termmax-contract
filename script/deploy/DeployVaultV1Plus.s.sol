@@ -13,11 +13,11 @@ import {ITermMaxVault} from "contracts/v1/vault/ITermMaxVault.sol";
 contract DeployVaultV1Plus is DeployBase {
     // Initialize vault configurations with a single USDC vault
     address assetAddr = address(0xCc121AB1098625728950b200490D28F8B2c324FD);
-    address curator = address(0x3406875997ECB92700c695B0A3125BCCe64CCBed);
-    address guardian = address(0x652Ed04CC2e4982F4Fe951Fc130Df21495dBC55a);
-    string name = "KeyRock-testnet-Vault";
-    string symbol = "KeyRock-testnet-Vault";
-    uint256 timelock = 1 days;
+    address curator = address(0x5eC5CB94D271E59f5dfF5A574851ba84Ee713f3D);
+    address guardian = address(0xaAC1EDD499Dc45388dBb43aAA1663A70D43746F3);
+    string name = "H1 Vault";
+    string symbol = "H1 Vault";
+    uint256 timelock = 60 seconds;
     uint256 maxCapacity = 50000000e6;
     uint64 performanceFeeRate = 1e7; // 10%
     uint64 minApy = 0; // 2%
