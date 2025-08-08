@@ -13,11 +13,11 @@ import {ITermMaxVault} from "contracts/v1/vault/ITermMaxVault.sol";
 contract DeployVaultV1Plus is DeployBase {
     // Initialize vault configurations with a single USDC vault
     address assetAddr = address(0xCc121AB1098625728950b200490D28F8B2c324FD);
-    address curator = address(0x5eC5CB94D271E59f5dfF5A574851ba84Ee713f3D);
-    address guardian = address(0xaAC1EDD499Dc45388dBb43aAA1663A70D43746F3);
-    string name = "H1 Vault";
-    string symbol = "H1 Vault";
-    uint256 timelock = 60 seconds;
+    address curator = address(0xea538231Ea9661b66Fc3A8C793e992AbC88c7b02);
+    address guardian = address(0x1e33FCa0b3A3305f1560520857d5E24854Fc5E5c);
+    string name = "F2 Vault";
+    string symbol = "F2 Vault";
+    uint256 timelock = 300 seconds;
     uint256 maxCapacity = 50000000e6;
     uint64 performanceFeeRate = 1e7; // 10%
     uint64 minApy = 0; // 2%
