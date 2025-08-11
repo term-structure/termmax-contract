@@ -157,7 +157,7 @@ contract TermMaxRouterV1Plus is
             tokenIn.safeIncreaseAllowance(address(order), tradingAmts[i]);
             netTokenOut += order.swapExactTokenToToken(tokenIn, tokenOut, recipient, tradingAmts[i], 0, deadline);
         }
-        if (netTokenOut < minTokenOut) revert InsufficientTokenOut(address(tokenOut), netTokenOut, minTokenOut);
+        if (netTokenOut < minTokenOut) revert InsufficientTokenOut(address(tokenOut), minTokenOut, netTokenOut);
     }
 
     function swapTokenToExactToken(
@@ -191,7 +191,7 @@ contract TermMaxRouterV1Plus is
             netTokenIn +=
                 order.swapTokenToExactToken(tokenIn, tokenOut, recipient, tradingAmts[i], maxTokenIn, deadline);
         }
-        if (netTokenIn > maxTokenIn) revert InsufficientTokenIn(address(tokenIn), netTokenIn, maxTokenIn);
+        if (netTokenIn > maxTokenIn) revert InsufficientTokenIn(address(tokenIn), maxTokenIn, netTokenIn);
     }
 
     function sellTokens(
@@ -214,7 +214,7 @@ contract TermMaxRouterV1Plus is
 
         netTokenOut = _swapExactTokenToToken(toenToSell, debtToken, recipient, orders, amtsToSellTokens, 0, deadline);
         netTokenOut += maxBurn;
-        if (netTokenOut < minTokenOut) revert InsufficientTokenOut(address(debtToken), netTokenOut, minTokenOut);
+        if (netTokenOut < minTokenOut) revert InsufficientTokenOut(address(debtToken), minTokenOut, netTokenOut);
         emit SellTokens(market, msg.sender, recipient, ftInAmt, xtInAmt, orders, amtsToSellTokens, netTokenOut);
     }
 
@@ -508,7 +508,7 @@ contract TermMaxRouterV1Plus is
         (uint256 redeemedAmt, bytes memory collateralData) = market.redeem(ftAmount, address(this));
         redeemedAmt += _doSwap(_decodeAmount(collateralData), units);
         if (redeemedAmt < minTokenOut) {
-            revert InsufficientTokenOut(address(debtToken), redeemedAmt, minTokenOut);
+            revert InsufficientTokenOut(address(debtToken), minTokenOut, redeemedAmt);
         }
         debtToken.safeTransfer(recipient, redeemedAmt);
         emit RedeemAndSwap(market, ftAmount, msg.sender, recipient, redeemedAmt);
