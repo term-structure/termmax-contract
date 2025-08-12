@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0xb880c6042a6a8db6185894058ffd25f446a7826b"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "8968606",
+    "timestamp": "1755005916"
+  },
+  "vaultInfo": {
+    "name": "S2 Vault",
+    "symbol": "S2-Vault",
+    "address": "0x6A0bFCB98c800eB34FE32992e854AdB57bEB0CD3",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 20000000,
+    "minApy": 1000000,
+    "minIdleFundRate": 10000000,
+    "maxCapacity": "50000000000000",
+    "timelock": 60,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0xbe6f452c7f6866b23fd757EA3E8Cb237bf39c2F1",
+    "guardian": "0xE24c59b5460F1A61E161BF94a41Fa1bD1fd0C762",
+  }
+}

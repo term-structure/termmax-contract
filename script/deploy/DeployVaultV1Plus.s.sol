@@ -12,13 +12,13 @@ import {ITermMaxVault} from "contracts/v1/vault/ITermMaxVault.sol";
 
 contract DeployVaultV1Plus is DeployBase {
     // Initialize vault configurations with a single USDC vault
-    address assetAddr = address(0x55d398326f99059fF775485246999027B3197955);
-    address curator = address();
-    address guardian = address();
-    string name = "BNB V1Plus Vault test";
-    string symbol = "BNB-V1Plus-Vault-test";
+    address assetAddr = address(0xCc121AB1098625728950b200490D28F8B2c324FD);
+    address curator = address(0xD7D75Bd7Af01640CB887CAD1882FDebD4Fb06032);
+    address guardian = address(0x12be92A16c984824F067bC892d19895d4d2E7fb9);
+    string name = "E2 Vault";
+    string symbol = "E2-Vault";
     uint256 timelock = 60 seconds;
-    uint256 maxCapacity = 1000000e6;
+    uint256 maxCapacity = 50000000e6;
     uint64 performanceFeeRate = 2e7; // 20%
     uint64 minApy = 1e6; // 1%
     uint64 minIdleFundRate = 1e7; // 1%
