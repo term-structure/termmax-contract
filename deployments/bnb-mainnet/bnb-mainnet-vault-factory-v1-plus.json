@@ -1,0 +1,15 @@
+{
+  "network": "bnb-mainnet",
+  "deployedAt": "1754669760",
+  "gitBranch": "deployment",
+  "gitCommitHash": "0x0xb880c6042a6a8db6185894058ffd25f446a7826b",
+  "blockInfo": {
+    "number": "56895589",
+    "timestamp": "1754669760"
+  },
+  "deployer": "0x56E3665038C5F0b56Cc7D81aC66C86521274B251",
+  "contracts": {
+    "vaultFactoryV1Plus": "0xaeD8649C449157F6D99cEfa1A99ce40BC3E2500F",
+    "vaultImplementationV1Plus": "0x996Bbfc49BC9e59b4A5CE6b3215Cce860E134978"
+  }
+}

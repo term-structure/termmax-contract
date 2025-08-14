@@ -12,14 +12,14 @@ import {ITermMaxVault} from "contracts/v1/vault/ITermMaxVault.sol";
 
 contract DeployVaultV1Plus is DeployBase {
     // Initialize vault configurations with a single USDC vault
-    address assetAddr = address(0xCc121AB1098625728950b200490D28F8B2c324FD);
-    address curator = address(0xD97Cf93156eA03D37d64469FCC0fD88AbF61801F);
-    address guardian = address(0x5596403f4196F4739268d1F7CaE37144da3396EB);
-    string name = "H3 Vault";
-    string symbol = "H3-Vault";
-    uint256 timelock = 60 seconds;
-    uint256 maxCapacity = 50000000e6;
-    uint64 performanceFeeRate = 2e7; // 20%
+    address assetAddr = address(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2);
+    address curator = address(0xEB4Af6fA3AFA08B10d593EC8fF87efB03BC04645);
+    address guardian = address(0x8cF8AA7805dd315372D5B9899554E5F1C4E35540);
+    string name = "Alpha wETH Core";
+    string symbol = "Alpha-wETH-Core";
+    uint256 timelock = 1 days;
+    uint256 maxCapacity = 100000000e18;
+    uint64 performanceFeeRate = 1e7; // 10%
     uint64 minApy = 1e6; // 1%
     uint64 minIdleFundRate = 1e7; // 1%
 
