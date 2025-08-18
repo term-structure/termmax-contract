@@ -10,6 +10,7 @@ if [ "$#" -lt 2 ]; then
     echo "     - deploy:access-manager  - Deploy Access Manager contract"
     echo "     - deploy:core            - Deploy Core contracts"
     echo "     - deploy:market          - Deploy Market contracts"
+    echo "     - deploy:market-viewer-v1-plus - Deploy Market Viewer V1 Plus contract"
     echo "     - deploy:order           - Deploy Order contracts"
     echo "     - deploy:vault           - Deploy Vault contracts"
     echo "     - deploy:vault-v1-plus   - Deploy Vault V1 Plus contracts"
@@ -98,12 +99,12 @@ esac
 # If deploying, validate deployment type
 if [ "$OPERATION" = "deploy" ]; then
     case $TYPE in
-        "access-manager"|"core"|"market"|"order"|"vault"|"vault-v1-plus"|"vault-factory-v1-plus"|"pretmx"|"adapters")
+        "access-manager"|"core"|"market"|"market-viewer-v1-plus"|"order"|"vault"|"vault-v1-plus"|"vault-factory-v1-plus"|"pretmx"|"adapters")
             echo "Deployment type: $TYPE"
             ;;
         *)
             echo "Unsupported deployment type: $TYPE"
-            echo "Supported deployment types: access-manager, core, market, order, vault, vault-v1-plus, vault-factory-v1-plus, pretmx, adapters"
+            echo "Supported deployment types: access-manager, core, market, market-viewer-v1-plus, order, vault, vault-v1-plus, vault-factory-v1-plus, pretmx, adapters"
             exit 1
             ;;
     esac
@@ -194,6 +195,8 @@ if [ "$OPERATION" = "deploy" ]; then
         SCRIPT_NAME="DeployVaultV1Plus"
     elif [ "$TYPE" = "vault-factory-v1-plus" ]; then
         SCRIPT_NAME="DeployVaultFactoryV1Plus"
+    elif [ "$TYPE" = "market-viewer-v1-plus" ]; then
+        SCRIPT_NAME="DeployMarketViewerV1Plus"
     else
         TYPE_CAPITALIZED="$(tr '[:lower:]' '[:upper:]' <<< ${TYPE:0:1})${TYPE:1}"
         SCRIPT_NAME="Deploy${TYPE_CAPITALIZED}"

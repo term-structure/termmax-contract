@@ -14,7 +14,7 @@ import {ITermMaxVault} from "../../v1/vault/ITermMaxVault.sol";
 import {OrderInfo} from "../../v1/vault/VaultStorage.sol";
 import {PendingAddress, PendingUint192} from "../../v1/lib/PendingLib.sol";
 import {OracleAggregator} from "../../v1/oracle/OracleAggregator.sol";
-import {TermMaxVaultV1Plus} from "../../v2/vault/TermMaxVaultV1Plus.sol";
+import {TermMaxVaultV1Plus} from "../../v1Plus/vault/TermMaxVaultV1Plus.sol";
 
 interface IPausable {
     function paused() external view returns (bool);
