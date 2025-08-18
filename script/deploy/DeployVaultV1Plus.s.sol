@@ -12,14 +12,14 @@ import {ITermMaxVault} from "contracts/v1/vault/ITermMaxVault.sol";
 
 contract DeployVaultV1Plus is DeployBase {
     // Initialize vault configurations with a single USDC vault
-    address assetAddr = address(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2);
-    address curator = address(0xEB4Af6fA3AFA08B10d593EC8fF87efB03BC04645);
-    address guardian = address(0x8cF8AA7805dd315372D5B9899554E5F1C4E35540);
-    string name = "Alpha wETH Core";
-    string symbol = "Alpha-wETH-Core";
+    address assetAddr = address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
+    address curator = address(0x008c7DC790fA31E6CA19D8Cb6d11C53f6A88DF6c);
+    address guardian = address(0xE88ef3CcC0De6e81f48d1994D97A5a51AD777FB9);
+    string name = "TermMax x Mezen Capital Vault";
+    string symbol = "TermMax-Mezen-Capital-Vault";
     uint256 timelock = 1 days;
-    uint256 maxCapacity = 100000000e18;
-    uint64 performanceFeeRate = 1e7; // 10%
+    uint256 maxCapacity = 50000000e18;
+    uint64 performanceFeeRate = 0; // 1e7 for 10%. 0 for 0%
     uint64 minApy = 1e6; // 1%
     uint64 minIdleFundRate = 1e7; // 1%
 

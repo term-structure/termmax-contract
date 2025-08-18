@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0xb43d74bacd57e9abd1b241362ae4a5ff4a49aeb0"
+  },
+  "blockInfo": {
+    "network": "eth-mainnet",
+    "blockNumber": "23166352",
+    "timestamp": "1755500879"
+  },
+  "vaultInfo": {
+    "name": "TermMax x Mezen Capital Vault",
+    "symbol": "TermMax-Mezen-Capital-Vault",
+    "address": "0x6aa8b4366d3BcFa51473677e9C961BAbADCec4e3",
+    "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "performanceFeeRate": 0,
+    "minApy": 1000000,
+    "minIdleFundRate": 10000000,
+    "maxCapacity": "50000000000000000000000000",
+    "timelock": 86400,
+    "admin": "0xDA4aAF85Bb924B53DCc2DFFa9e1A9C2Ef97aCFDF",
+    "curator": "0x008c7DC790fA31E6CA19D8Cb6d11C53f6A88DF6c",
+    "guardian": "0xE88ef3CcC0De6e81f48d1994D97A5a51AD777FB9",
+  }
+}
