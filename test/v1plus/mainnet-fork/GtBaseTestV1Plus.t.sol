@@ -364,9 +364,7 @@ abstract contract GtBaseTestV1Plus is ForkBaseTestV1Plus {
         swapData.tradingAmts = amtsToBuyFt;
         swapData.deadline = block.timestamp + 1 hours;
 
-        uint256 netTokenOut = res.router.flashRepayFromColl(
-            taker, res.market, gtId, byDebtToken, 0, units, swapData
-        );
+        uint256 netTokenOut = res.router.flashRepayFromColl(taker, res.market, gtId, byDebtToken, 0, units, swapData);
 
         uint256 debtTokenBalanceAfterRepay = res.debtToken.balanceOf(taker);
 
