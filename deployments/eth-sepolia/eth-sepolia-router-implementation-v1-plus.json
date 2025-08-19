@@ -1,0 +1,15 @@
+{
+  "network": "eth-sepolia",
+  "deployedAt": "1755606048",
+  "gitBranch": "feat/v1.1.0",
+  "gitCommitHash": "0x0xab6f14160e2b1b044a13ebc39ede4e9f7655f914",
+  "blockInfo": {
+    "number": "9018207",
+    "timestamp": "1755606048"
+  },
+  "deployer": "0xE355d5D8aa52EF0FbbD037C4a3C5E6Fd659cf46B",
+  "contracts": {
+    "marketViewerV1Plus": "0x1aB3A779C447e8c07AE5f94c3d9372574e260Ed2",
+    "routerImplementationV1Plus": "0xad30B2C0DD85048c478e6Af8521cf6B8bc6A7064"
+  }
+}

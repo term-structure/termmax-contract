@@ -23,6 +23,7 @@ import {IOracle} from "contracts/v1/oracle/IOracle.sol";
 import {VaultFactory, IVaultFactory} from "contracts/v1/factory/VaultFactory.sol";
 import {AccessManager} from "contracts/v1/access/AccessManager.sol";
 import {TermMaxRouterV1Plus, UUPSUpgradeable} from "contracts/v1plus/router/TermMaxRouterV1Plus.sol";
+import {MarketViewerV1Plus} from "contracts/v1plus/router/MarketViewerV1Plus.sol";
 
 contract UpgradeRouterV1_1_0 is DeployBase {
     // Network-specific config loaded from environment variables
@@ -73,10 +74,12 @@ contract UpgradeRouterV1_1_0 is DeployBase {
 
         vm.startBroadcast(deployerPrivateKey);
         console.log("upgrade router to v1.1.0..., address:", routerAddr);
-        accessManager = AccessManager(accessManagerAddr);
         TermMaxRouterV1Plus newRouter = new TermMaxRouterV1Plus();
         console.log("Deploying new router implementation at:", address(newRouter));
         accessManager.upgradeSubContract(UUPSUpgradeable(routerAddr), address(newRouter), bytes(""));
+
+        MarketViewerV1Plus marketViewer = new MarketViewerV1Plus();
+        console.log("Deploying new market viewer v1.1.0 at:", address(marketViewer));
         vm.stopBroadcast();
 
         console.log("===== Git Info =====");
@@ -91,5 +94,55 @@ contract UpgradeRouterV1_1_0 is DeployBase {
         console.log("===== Core Info =====");
         console.log("Use access manager:", accessManagerAddr);
         console.log("Use router:", routerAddr);
+
+        // Write deployment results to a JSON file
+        string memory deploymentJson = string(
+            abi.encodePacked(
+                "{\n",
+                '  "network": "',
+                network,
+                '",\n',
+                '  "deployedAt": "',
+                vm.toString(block.timestamp),
+                '",\n',
+                '  "gitBranch": "',
+                getGitBranch(),
+                '",\n',
+                '  "gitCommitHash": "0x',
+                vm.toString(getGitCommitHash()),
+                '",\n',
+                '  "blockInfo": {\n',
+                '    "number": "',
+                vm.toString(currentBlock),
+                '",\n',
+                '    "timestamp": "',
+                vm.toString(currentTimestamp),
+                '"\n',
+                "  },\n",
+                '  "deployer": "',
+                vm.toString(deployerAddr),
+                '",\n',
+                '  "contracts": {\n',
+                '    "marketViewerV1Plus": "',
+                vm.toString(address(marketViewer)),
+                '",\n',
+                '    "routerImplementationV1Plus": "',
+                vm.toString(address(newRouter)),
+                '"\n',
+                "  }\n",
+                "}"
+            )
+        );
+
+        // Create deployment directory if it doesn't exist
+        string memory deploymentsDir = string.concat(vm.projectRoot(), "/deployments/", network);
+        if (!vm.exists(deploymentsDir)) {
+            vm.createDir(deploymentsDir, true);
+        }
+
+        // Write the JSON file
+        string memory filePath = string.concat(deploymentsDir, "/", network, "-router-implementation-v1-plus.json");
+        vm.writeFile(filePath, deploymentJson);
+        console.log("Deployment information written to:", filePath);
     }
 }
