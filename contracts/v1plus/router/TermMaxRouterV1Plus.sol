@@ -29,6 +29,7 @@ import {RouterEventsV1Plus} from "../events/RouterEventsV1Plus.sol";
 import {RouterErrorsV1Plus} from "../errors/RouterErrorsV1Plus.sol";
 import {TransferUtilsV1Plus} from "../lib/TransferUtilsV1Plus.sol";
 import {ArrayUtilsV1Plus} from "../lib/ArrayUtilsV1Plus.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 
 /**
  * @title TermMax Router V1Plus
@@ -43,7 +44,8 @@ contract TermMaxRouterV1Plus is
     IERC721Receiver,
     ITermMaxRouterV1Plus,
     RouterErrors,
-    RouterEvents
+    RouterEvents,
+    VersionV1Plus
 {
     using SafeCast for *;
     using TransferUtilsV1Plus for IERC20;
