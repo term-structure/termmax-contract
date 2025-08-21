@@ -13,13 +13,13 @@ import {ITermMaxVault} from "contracts/v1/vault/ITermMaxVault.sol";
 contract DeployVaultV1Plus is DeployBase {
     // Initialize vault configurations with a single USDC vault
     address assetAddr = address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
-    address curator = address(0xD7D75Bd7Af01640CB887CAD1882FDebD4Fb06032);
-    address guardian = address(0x12be92A16c984824F067bC892d19895d4d2E7fb9);
-    string name = "Edge Capital UltraYield";
-    string symbol = "Edge-Capital-UltraYield";
+    address curator = address(0x313660F9b9bdF5E061dE7892C7927208E4F8080F);
+    address guardian = address(0x20d4E208E8135cd72Cc4f44ff1448635dff34a37);
+    string name = "USDC Boost Yield Vault";
+    string symbol = "USDC-Boost-Yield-Vault";
     uint256 timelock = 1 days;
     uint256 maxCapacity = 50000000e6;
-    uint64 performanceFeeRate = 0; // 1e7 for 10%. 0 for 0%
+    uint64 performanceFeeRate = 1e7; // 1e7 for 10%. 0 for 0%
     uint64 minApy = 1e6; // 1%
     uint64 minIdleFundRate = 1e7; // 1%
 
