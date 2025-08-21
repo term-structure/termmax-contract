@@ -3,6 +3,7 @@ pragma solidity ^0.8.27;
 
 import "../../v1/access/AccessManager.sol";
 import {IOracleV1Plus} from "../oracle/IOracleV1Plus.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 
 /**
  * @title TermMax Access Manager V1Plus
@@ -10,7 +11,7 @@ import {IOracleV1Plus} from "../oracle/IOracleV1Plus.sol";
  * @notice Extended access manager for TermMax V1Plus protocol with additional oracle and batch operations
  * @dev Inherits from AccessManager V1 and adds V1Plus-specific functionality for managing oracles and batch operations
  */
-contract AccessManagerV1Plus is AccessManager {
+contract AccessManagerV1Plus is AccessManager, VersionV1Plus {
     /**
      * @notice Batch pause/unpause multiple entities in a single transaction
      * @dev Allows efficient management of multiple pausable contracts simultaneously

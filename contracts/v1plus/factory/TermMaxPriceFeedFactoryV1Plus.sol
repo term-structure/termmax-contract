@@ -5,6 +5,7 @@ import {TermMaxERC4626PriceFeed} from "../oracle/priceFeeds/TermMaxERC4626PriceF
 import {TermMaxPriceFeedConverter} from "../oracle/priceFeeds/TermMaxPriceFeedConverter.sol";
 import {TermMaxPTPriceFeed} from "../oracle/priceFeeds/TermMaxPTPriceFeed.sol";
 import {FactoryEventsV1Plus} from "../events/FactoryEventsV1Plus.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 
 /**
  * @title TermMax Price Feed Factory V1Plus
@@ -13,7 +14,7 @@ import {FactoryEventsV1Plus} from "../events/FactoryEventsV1Plus.sol";
  * @dev Provides standardized creation methods for ERC4626 vault price feeds, price feed converters, and Pendle PT price feeds
  * All price feeds implement the ITermMaxPriceFeed interface for consistency
  */
-contract TermMaxPriceFeedFactoryV1Plus {
+contract TermMaxPriceFeedFactoryV1Plus is VersionV1Plus {
     /**
      * @notice Creates a price feed for ERC4626 vaults
      * @dev Deploys a TermMaxERC4626PriceFeed that calculates vault token prices based on the underlying asset price and vault exchange rate

@@ -49,7 +49,8 @@ contract TermMaxVaultV1Plus is
     ISwapCallback,
     ITermMaxVaultV1Plus,
     TransactionReentrancyGuard,
-    VaultEventsV1Plus
+    VaultEventsV1Plus,
+    VersionV1Plus
 {
     using SafeCast for uint256;
     using TransferUtils for IERC20;

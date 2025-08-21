@@ -2,8 +2,9 @@
 pragma solidity ^0.8.27;
 
 import "../../v1/router/MarketViewer.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 
-contract MarketViewerV1Plus is MarketViewer {
+contract MarketViewerV1Plus is MarketViewer, VersionV1Plus {
     function assetsWithERC20Collateral(ITermMaxMarket market, address owner)
         external
         view
