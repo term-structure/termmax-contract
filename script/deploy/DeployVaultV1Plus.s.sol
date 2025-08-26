@@ -13,12 +13,12 @@ import {ITermMaxVault} from "contracts/v1/vault/ITermMaxVault.sol";
 contract DeployVaultV1Plus is DeployBase {
     // Initialize vault configurations with a single USDC vault
     address assetAddr = address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
-    address curator = address(0x313660F9b9bdF5E061dE7892C7927208E4F8080F);
-    address guardian = address(0x20d4E208E8135cd72Cc4f44ff1448635dff34a37);
-    string name = "USDC Boost Yield Vault";
-    string symbol = "USDC-Boost-Yield-Vault";
+    address curator = address(0x67460001C991708c6A6BAFc511a60c2E414D7Ecf);
+    address guardian = address(0xf1a9676B03Dd3B2066214D2aD8B4B59ED6642C53);
+    string name = "Keyrock USDC";
+    string symbol = "Keyrock-USDC";
     uint256 timelock = 1 days;
-    uint256 maxCapacity = 50000000e6;
+    uint256 maxCapacity = 100000000e6;
     uint64 performanceFeeRate = 1e7; // 1e7 for 10%. 0 for 0%
     uint64 minApy = 1e6; // 1%
     uint64 minIdleFundRate = 1e7; // 1%
