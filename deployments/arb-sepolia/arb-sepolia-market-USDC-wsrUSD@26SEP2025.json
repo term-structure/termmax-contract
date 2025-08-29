@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0x7d2bf1d42dfb46c206b64fa693a56d6d3b4f8496"
+  },
+  "blockInfo": {
+    "number": "9025089",
+    "timestamp": "1755689419"
+  },
+  "market": "0xc7DA023Da9430E2aC3a9D6042FbDd5Ce8C1e00ba",
+  "collateral": {
+    "address": "0x6c676fAE741e0810D6fDF09aA3D516B9e1fc67ae",
+    "symbol": "wsrUSD",
+    "priceFeed": "0xA3114Fa714e30912c6F1f1d4517f71be22Bcac0E",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0xE7e6EA2B6A1D7E7d80727290a86CCC9FE5fbe0C1",
+    "symbol": "USDC",
+    "priceFeed": "0x777edd607B3eB8a9a85F717F660DD160e5140Bfd",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0xEEB1d15beBafE7aa836934624629CeD47f2b85f7",
+    "xt": "0xd379FBb367146631b2Eba4ca2FBE8D0F3E8a6007",
+    "gt": "0x7EF72DacB50600d040fc259C477D7259B81D0B8B"
+  },
+  "config": {
+    "marketSymbol": "USDC/wsrUSD@26SEP2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "26SEP2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "1000000",
+      "mintGtFeeRef": "2000000"
+    }
+  }
+}
