@@ -35,6 +35,7 @@ import {ITermMaxVault} from "../../v1/vault/ITermMaxVault.sol";
 import {ITermMaxVaultV1Plus} from "./ITermMaxVaultV1Plus.sol";
 import {VaultErrorsV1Plus} from "../errors/VaultErrorsV1Plus.sol";
 import {TransactionReentrancyGuard} from "../lib/TransactionReentrancyGuard.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 
 contract TermMaxVaultV1Plus is
     VaultStorageV1Plus,
@@ -47,7 +48,9 @@ contract TermMaxVaultV1Plus is
     VaultEvents,
     ISwapCallback,
     ITermMaxVaultV1Plus,
-    TransactionReentrancyGuard
+    TransactionReentrancyGuard,
+    VaultEventsV1Plus,
+    VersionV1Plus
 {
     using SafeCast for uint256;
     using TransferUtils for IERC20;

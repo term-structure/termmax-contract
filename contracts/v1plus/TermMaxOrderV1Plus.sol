@@ -22,6 +22,7 @@ import {ITermMaxMarketV1Plus} from "./ITermMaxMarketV1Plus.sol";
 import {ITermMaxOrderV1Plus} from "./ITermMaxOrderV1Plus.sol";
 import {OrderEventsV1Plus} from "./events/OrderEventsV1Plus.sol";
 import {OrderErrorsV1Plus} from "./errors/OrderErrorsV1Plus.sol";
+import {VersionV1Plus} from "./VersionV1Plus.sol";
 
 /**
  * @title TermMax Order V1Plus
@@ -34,7 +35,8 @@ contract TermMaxOrderV1Plus is
     Ownable2StepUpgradeable,
     PausableUpgradeable,
     OrderErrors,
-    OrderEvents
+    OrderEvents,
+    VersionV1Plus
 {
     using SafeCast for uint256;
     using SafeCast for int256;

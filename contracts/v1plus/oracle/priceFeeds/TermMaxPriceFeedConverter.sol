@@ -5,8 +5,9 @@ import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IER
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {SafeCast} from "@openzeppelin/contracts/utils/math/SafeCast.sol";
 import {ITermMaxPriceFeed, AggregatorV3Interface} from "./ITermMaxPriceFeed.sol";
+import {VersionV1Plus} from "../../VersionV1Plus.sol";
 
-contract TermMaxPriceFeedConverter is ITermMaxPriceFeed {
+contract TermMaxPriceFeedConverter is ITermMaxPriceFeed, VersionV1Plus {
     using Math for *;
     using SafeCast for *;
 

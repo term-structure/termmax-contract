@@ -8,4 +8,6 @@ interface GearingTokenErrorsV1Plus {
     error GtIdArrayIsEmpty();
     /// @notice Error for Gearing Token is expired
     error GtIsExpired();
+    /// @notice Error for Gearing Token id is duplicate when merging
+    error DuplicateIdInMerge(uint256 id);
 }

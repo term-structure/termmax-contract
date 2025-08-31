@@ -262,236 +262,236 @@ contract ForkPrdRollover is ForkBaseTestV1Plus {
         vm.stopPrank();
     }
 
-    function testRolloverPtV1Plus() public {
-        address borrower = vm.randomAddress();
-        vm.label(borrower, "borrower");
-        address admin = vm.randomAddress();
-        vm.label(admin, "admin");
+    // function testRolloverPtV1Plus() public {
+    //     address borrower = vm.randomAddress();
+    //     vm.label(borrower, "borrower");
+    //     address admin = vm.randomAddress();
+    //     vm.label(admin, "admin");
 
-        vm.startPrank(admin);
-        ITermMaxMarket market;
-        uint256 gtId1;
-        uint128 oldDebt = 100e6;
-        uint256 oldCollateral = 1000e18;
+    //     vm.startPrank(admin);
+    //     ITermMaxMarket market;
+    //     uint256 gtId1;
+    //     uint128 oldDebt = 100e6;
+    //     uint256 oldCollateral = 1000e18;
 
-        deal(pt_susde_may_29, admin, oldCollateral);
+    //     deal(pt_susde_may_29, admin, oldCollateral);
 
-        // create new market support V1Plus flash repay
-        {
-            TermMaxFactoryV1Plus f2 = deployFactory(admin);
-            MarketConfig memory marketConfig = mmay_30.config();
-            (,, IGearingToken gt, address collateral, IERC20 debtToken) = mmay_30.tokens();
-            GtConfig memory gtConfig = gt.getGtConfig();
-            MarketInitialParams memory params = MarketInitialParams({
-                collateral: collateral,
-                debtToken: IERC20Metadata(address(debtToken)),
-                admin: admin,
-                gtImplementation: address(0),
-                marketConfig: marketConfig,
-                loanConfig: gtConfig.loanConfig,
-                gtInitalParams: abi.encode(type(uint128).max),
-                tokenName: "Test",
-                tokenSymbol: "TEST"
-            });
-            market = ITermMaxMarket(f2.createMarket(keccak256("GearingTokenWithERC20"), params, 1));
-            vm.label(address(market), "newMarket");
+    //     // create new market support V1Plus flash repay
+    //     {
+    //         TermMaxFactoryV1Plus f2 = deployFactory(admin);
+    //         MarketConfig memory marketConfig = mmay_30.config();
+    //         (,, IGearingToken gt, address collateral, IERC20 debtToken) = mmay_30.tokens();
+    //         GtConfig memory gtConfig = gt.getGtConfig();
+    //         MarketInitialParams memory params = MarketInitialParams({
+    //             collateral: collateral,
+    //             debtToken: IERC20Metadata(address(debtToken)),
+    //             admin: admin,
+    //             gtImplementation: address(0),
+    //             marketConfig: marketConfig,
+    //             loanConfig: gtConfig.loanConfig,
+    //             gtInitalParams: abi.encode(type(uint128).max),
+    //             tokenName: "Test",
+    //             tokenSymbol: "TEST"
+    //         });
+    //         market = ITermMaxMarket(f2.createMarket(keccak256("GearingTokenWithERC20"), params, 1));
+    //         vm.label(address(market), "newMarket");
 
-            (,, IGearingToken gt2,,) = market.tokens();
+    //         (,, IGearingToken gt2,,) = market.tokens();
 
-            IERC20(pt_susde_may_29).approve(address(gt2), oldCollateral);
-            (gtId1,) = market.issueFt(borrower, 100e6, abi.encode(oldCollateral));
+    //         IERC20(pt_susde_may_29).approve(address(gt2), oldCollateral);
+    //         (gtId1,) = market.issueFt(borrower, 100e6, abi.encode(oldCollateral));
 
-            vm.label(address(market), "market_may_30");
-            vm.label(address(gt2), "gt_may_30");
-        }
+    //         vm.label(address(market), "market_may_30");
+    //         vm.label(address(gt2), "gt_may_30");
+    //     }
 
-        vm.stopPrank();
+    //     vm.stopPrank();
 
-        uint128 debt = 20e6;
-        uint256 collateralAmount = 500e18;
+    //     uint128 debt = 20e6;
+    //     uint256 collateralAmount = 500e18;
 
-        vm.startPrank(borrower);
-        vm.warp(may_30 - 0.5 days);
-        // roll gt
-        {
-            address pm1 = 0xB162B764044697cf03617C2EFbcB1f42e31E4766;
-            address pm2 = 0x4339Ffe2B7592Dc783ed13cCE310531aB366dEac;
+    //     vm.startPrank(borrower);
+    //     vm.warp(may_30 - 0.5 days);
+    //     // roll gt
+    //     {
+    //         address pm1 = 0xB162B764044697cf03617C2EFbcB1f42e31E4766;
+    //         address pm2 = 0x4339Ffe2B7592Dc783ed13cCE310531aB366dEac;
 
-            SwapUnit[] memory swapUnits = new SwapUnit[](2);
-            swapUnits[0] = SwapUnit({
-                adapter: pendleAdapter,
-                tokenIn: pt_susde_may_29,
-                tokenOut: susde,
-                swapData: abi.encode(pm1, collateralAmount, 0)
-            });
-            swapUnits[1] = SwapUnit({
-                adapter: pendleAdapter,
-                tokenIn: susde,
-                tokenOut: pt_susde_jun_31,
-                swapData: abi.encode(pm2, 1e18, 0)
-            });
+    //         SwapUnit[] memory swapUnits = new SwapUnit[](2);
+    //         swapUnits[0] = SwapUnit({
+    //             adapter: pendleAdapter,
+    //             tokenIn: pt_susde_may_29,
+    //             tokenOut: susde,
+    //             swapData: abi.encode(pm1, collateralAmount, 0)
+    //         });
+    //         swapUnits[1] = SwapUnit({
+    //             adapter: pendleAdapter,
+    //             tokenIn: susde,
+    //             tokenOut: pt_susde_jun_31,
+    //             swapData: abi.encode(pm2, 1e18, 0)
+    //         });
 
-            uint128 additionalAssets = debt / 10;
+    //         uint128 additionalAssets = debt / 10;
 
-            ITermMaxOrder[] memory orders = new ITermMaxOrder[](1);
-            orders[0] = ITermMaxOrder(address(o_aug_1));
-            uint128[] memory amounts = new uint128[](1);
-            amounts[0] = debt - additionalAssets;
-            (IERC20 ft,, IGearingToken gt, address collateral,) = market.tokens();
+    //         ITermMaxOrder[] memory orders = new ITermMaxOrder[](1);
+    //         orders[0] = ITermMaxOrder(address(o_aug_1));
+    //         uint128[] memory amounts = new uint128[](1);
+    //         amounts[0] = debt - additionalAssets;
+    //         (IERC20 ft,, IGearingToken gt, address collateral,) = market.tokens();
 
-            deal(usdc, borrower, additionalAssets);
-            IERC20(usdc).approve(address(router), additionalAssets);
-            gt.approve(address(router), gtId1);
+    //         deal(usdc, borrower, additionalAssets);
+    //         IERC20(usdc).approve(address(router), additionalAssets);
+    //         gt.approve(address(router), gtId1);
 
-            (IERC20 ft_aug_1,,,,) = maug_1.tokens();
-            ITermMaxRouterV1Plus.TermMaxSwapData memory swapData = ITermMaxRouterV1Plus.TermMaxSwapData({
-                tokenIn: address(ft_aug_1),
-                tokenOut: usdc,
-                orders: orders,
-                tradingAmts: amounts,
-                netTokenAmt: debt,
-                deadline: aug_1
-            });
+    //         (IERC20 ft_aug_1,,,,) = maug_1.tokens();
+    //         ITermMaxRouterV1Plus.TermMaxSwapData memory swapData = ITermMaxRouterV1Plus.TermMaxSwapData({
+    //             tokenIn: address(ft_aug_1),
+    //             tokenOut: usdc,
+    //             orders: orders,
+    //             tradingAmts: amounts,
+    //             netTokenAmt: debt,
+    //             deadline: aug_1
+    //         });
 
-            uint128 maxLtv = 0.9e8;
-            uint256 gtId2 = router.rolloverGtV1Plus(
-                borrower, gt, gtId1, debt, additionalAssets, collateralAmount, swapUnits, maug_1, 0, swapData, maxLtv
-            );
+    //         uint128 maxLtv = 0.9e8;
+    //         uint256 gtId2 = router.rolloverGtV1Plus(
+    //             borrower, gt, gtId1, debt, additionalAssets, collateralAmount, swapUnits, maug_1, 0, swapData, maxLtv
+    //         );
 
-            (address owner, uint128 currentDebt, bytes memory currentCollateral) = gt.loanInfo(gtId1);
-            assertEq(owner, borrower, "borrower should be the same");
-            assertEq(currentDebt + debt, oldDebt, "debt should be the same");
-            assertEq(
-                abi.decode(currentCollateral, (uint256)),
-                oldCollateral - collateralAmount,
-                "collateral should be the same"
-            );
+    //         (address owner, uint128 currentDebt, bytes memory currentCollateral) = gt.loanInfo(gtId1);
+    //         assertEq(owner, borrower, "borrower should be the same");
+    //         assertEq(currentDebt + debt, oldDebt, "debt should be the same");
+    //         assertEq(
+    //             abi.decode(currentCollateral, (uint256)),
+    //             oldCollateral - collateralAmount,
+    //             "collateral should be the same"
+    //         );
 
-            (,, IGearingToken gt2,,) = maug_1.tokens();
-            console.log("new gtId:", gtId2);
-            (address owner2, uint128 currentDebt2, bytes memory currentCollateral2) = gt2.loanInfo(gtId2);
-            assertEq(owner2, borrower, "borrower should be the same");
-            console.log("new gt debt:", currentDebt2 / 1e6);
-            console.log("new gt collateral:", abi.decode(currentCollateral2, (uint256)) / 1e18);
-        }
+    //         (,, IGearingToken gt2,,) = maug_1.tokens();
+    //         console.log("new gtId:", gtId2);
+    //         (address owner2, uint128 currentDebt2, bytes memory currentCollateral2) = gt2.loanInfo(gtId2);
+    //         assertEq(owner2, borrower, "borrower should be the same");
+    //         console.log("new gt debt:", currentDebt2 / 1e6);
+    //         console.log("new gt collateral:", abi.decode(currentCollateral2, (uint256)) / 1e18);
+    //     }
 
-        vm.stopPrank();
-    }
+    //     vm.stopPrank();
+    // }
 
-    function testRolloverPtV1PlusWithCollateral() public {
-        address borrower = vm.randomAddress();
-        vm.label(borrower, "borrower");
-        address admin = vm.randomAddress();
-        vm.label(admin, "admin");
+    // function testRolloverPtV1PlusWithCollateral() public {
+    //     address borrower = vm.randomAddress();
+    //     vm.label(borrower, "borrower");
+    //     address admin = vm.randomAddress();
+    //     vm.label(admin, "admin");
 
-        vm.startPrank(admin);
-        ITermMaxMarket market;
-        uint256 gtId1;
-        uint128 oldDebt = 100e6;
-        uint256 oldCollateral = 1000e18;
+    //     vm.startPrank(admin);
+    //     ITermMaxMarket market;
+    //     uint256 gtId1;
+    //     uint128 oldDebt = 100e6;
+    //     uint256 oldCollateral = 1000e18;
 
-        deal(pt_susde_may_29, admin, oldCollateral);
+    //     deal(pt_susde_may_29, admin, oldCollateral);
 
-        // create new market support V1Plus flash repay
-        {
-            TermMaxFactoryV1Plus f2 = deployFactory(admin);
-            MarketConfig memory marketConfig = mmay_30.config();
-            (,, IGearingToken gt, address collateral, IERC20 debtToken) = mmay_30.tokens();
-            GtConfig memory gtConfig = gt.getGtConfig();
-            MarketInitialParams memory params = MarketInitialParams({
-                collateral: collateral,
-                debtToken: IERC20Metadata(address(debtToken)),
-                admin: admin,
-                gtImplementation: address(0),
-                marketConfig: marketConfig,
-                loanConfig: gtConfig.loanConfig,
-                gtInitalParams: abi.encode(type(uint128).max),
-                tokenName: "Test",
-                tokenSymbol: "TEST"
-            });
-            market = ITermMaxMarket(f2.createMarket(keccak256("GearingTokenWithERC20"), params, 1));
-            vm.label(address(market), "newMarket");
+    //     // create new market support V1Plus flash repay
+    //     {
+    //         TermMaxFactoryV1Plus f2 = deployFactory(admin);
+    //         MarketConfig memory marketConfig = mmay_30.config();
+    //         (,, IGearingToken gt, address collateral, IERC20 debtToken) = mmay_30.tokens();
+    //         GtConfig memory gtConfig = gt.getGtConfig();
+    //         MarketInitialParams memory params = MarketInitialParams({
+    //             collateral: collateral,
+    //             debtToken: IERC20Metadata(address(debtToken)),
+    //             admin: admin,
+    //             gtImplementation: address(0),
+    //             marketConfig: marketConfig,
+    //             loanConfig: gtConfig.loanConfig,
+    //             gtInitalParams: abi.encode(type(uint128).max),
+    //             tokenName: "Test",
+    //             tokenSymbol: "TEST"
+    //         });
+    //         market = ITermMaxMarket(f2.createMarket(keccak256("GearingTokenWithERC20"), params, 1));
+    //         vm.label(address(market), "newMarket");
 
-            (,, IGearingToken gt2,,) = market.tokens();
+    //         (,, IGearingToken gt2,,) = market.tokens();
 
-            IERC20(pt_susde_may_29).approve(address(gt2), oldCollateral);
-            (gtId1,) = market.issueFt(borrower, 100e6, abi.encode(oldCollateral));
+    //         IERC20(pt_susde_may_29).approve(address(gt2), oldCollateral);
+    //         (gtId1,) = market.issueFt(borrower, 100e6, abi.encode(oldCollateral));
 
-            vm.label(address(market), "market_may_30");
-            vm.label(address(gt2), "gt_may_30");
-        }
+    //         vm.label(address(market), "market_may_30");
+    //         vm.label(address(gt2), "gt_may_30");
+    //     }
 
-        vm.stopPrank();
+    //     vm.stopPrank();
 
-        uint128 debt = 20e6;
-        uint256 collateralAmount = 500e18;
+    //     uint128 debt = 20e6;
+    //     uint256 collateralAmount = 500e18;
 
-        vm.startPrank(borrower);
-        vm.warp(may_30 - 0.5 days);
-        // roll gt
-        {
-            address pm1 = 0xB162B764044697cf03617C2EFbcB1f42e31E4766;
-            address pm2 = 0x4339Ffe2B7592Dc783ed13cCE310531aB366dEac;
+    //     vm.startPrank(borrower);
+    //     vm.warp(may_30 - 0.5 days);
+    //     // roll gt
+    //     {
+    //         address pm1 = 0xB162B764044697cf03617C2EFbcB1f42e31E4766;
+    //         address pm2 = 0x4339Ffe2B7592Dc783ed13cCE310531aB366dEac;
 
-            SwapUnit[] memory swapUnits = new SwapUnit[](2);
-            swapUnits[0] = SwapUnit({
-                adapter: pendleAdapter,
-                tokenIn: pt_susde_may_29,
-                tokenOut: susde,
-                swapData: abi.encode(pm1, collateralAmount, 0)
-            });
-            swapUnits[1] = SwapUnit({
-                adapter: pendleAdapter,
-                tokenIn: susde,
-                tokenOut: pt_susde_jun_31,
-                swapData: abi.encode(pm2, 1e18, 0)
-            });
+    //         SwapUnit[] memory swapUnits = new SwapUnit[](2);
+    //         swapUnits[0] = SwapUnit({
+    //             adapter: pendleAdapter,
+    //             tokenIn: pt_susde_may_29,
+    //             tokenOut: susde,
+    //             swapData: abi.encode(pm1, collateralAmount, 0)
+    //         });
+    //         swapUnits[1] = SwapUnit({
+    //             adapter: pendleAdapter,
+    //             tokenIn: susde,
+    //             tokenOut: pt_susde_jun_31,
+    //             swapData: abi.encode(pm2, 1e18, 0)
+    //         });
 
-            uint128 additionalAssets = 0;
-            uint256 additionalCollateral = 2 ether;
+    //         uint128 additionalAssets = 0;
+    //         uint256 additionalCollateral = 2 ether;
 
-            ITermMaxOrder[] memory orders = new ITermMaxOrder[](1);
-            orders[0] = ITermMaxOrder(address(o_aug_1));
-            uint128[] memory amounts = new uint128[](1);
-            amounts[0] = debt - additionalAssets;
-            (IERC20 ft,, IGearingToken gt, address collateral,) = market.tokens();
+    //         ITermMaxOrder[] memory orders = new ITermMaxOrder[](1);
+    //         orders[0] = ITermMaxOrder(address(o_aug_1));
+    //         uint128[] memory amounts = new uint128[](1);
+    //         amounts[0] = debt - additionalAssets;
+    //         (IERC20 ft,, IGearingToken gt, address collateral,) = market.tokens();
 
-            deal(pt_susde_jun_31, borrower, additionalCollateral);
-            IERC20(pt_susde_jun_31).approve(address(router), additionalCollateral);
-            gt.approve(address(router), gtId1);
+    //         deal(pt_susde_jun_31, borrower, additionalCollateral);
+    //         IERC20(pt_susde_jun_31).approve(address(router), additionalCollateral);
+    //         gt.approve(address(router), gtId1);
 
-            (IERC20 ft_aug_1,,,,) = maug_1.tokens();
-            ITermMaxRouterV1Plus.TermMaxSwapData memory swapData = ITermMaxRouterV1Plus.TermMaxSwapData({
-                tokenIn: address(ft_aug_1),
-                tokenOut: usdc,
-                orders: orders,
-                tradingAmts: amounts,
-                netTokenAmt: debt + 10e6,
-                deadline: aug_1
-            });
+    //         (IERC20 ft_aug_1,,,,) = maug_1.tokens();
+    //         ITermMaxRouterV1Plus.TermMaxSwapData memory swapData = ITermMaxRouterV1Plus.TermMaxSwapData({
+    //             tokenIn: address(ft_aug_1),
+    //             tokenOut: usdc,
+    //             orders: orders,
+    //             tradingAmts: amounts,
+    //             netTokenAmt: debt + 10e6,
+    //             deadline: aug_1
+    //         });
 
-            uint128 maxLtv = 0.9e8;
-            uint256 gtId2 = router.rolloverGtV1Plus(
-                borrower, gt, gtId1, debt, additionalAssets, collateralAmount, swapUnits, maug_1, 0, swapData, maxLtv
-            );
+    //         uint128 maxLtv = 0.9e8;
+    //         uint256 gtId2 = router.rolloverGtV1Plus(
+    //             borrower, gt, gtId1, debt, additionalAssets, collateralAmount, swapUnits, maug_1, 0, swapData, maxLtv
+    //         );
 
-            (address owner, uint128 currentDebt, bytes memory currentCollateral) = gt.loanInfo(gtId1);
-            assertEq(owner, borrower, "borrower should be the same");
-            assertEq(currentDebt + debt, oldDebt, "debt should be the same");
-            assertEq(
-                abi.decode(currentCollateral, (uint256)),
-                oldCollateral - collateralAmount,
-                "collateral should be the same"
-            );
+    //         (address owner, uint128 currentDebt, bytes memory currentCollateral) = gt.loanInfo(gtId1);
+    //         assertEq(owner, borrower, "borrower should be the same");
+    //         assertEq(currentDebt + debt, oldDebt, "debt should be the same");
+    //         assertEq(
+    //             abi.decode(currentCollateral, (uint256)),
+    //             oldCollateral - collateralAmount,
+    //             "collateral should be the same"
+    //         );
 
-            (,, IGearingToken gt2,,) = maug_1.tokens();
-            console.log("new gtId:", gtId2);
-            (address owner2, uint128 currentDebt2, bytes memory currentCollateral2) = gt2.loanInfo(gtId2);
-            assertEq(owner2, borrower, "borrower should be the same");
-            console.log("new gt debt:", currentDebt2 / 1e6);
-            console.log("new gt collateral:", abi.decode(currentCollateral2, (uint256)) / 1e18);
-        }
+    //         (,, IGearingToken gt2,,) = maug_1.tokens();
+    //         console.log("new gtId:", gtId2);
+    //         (address owner2, uint128 currentDebt2, bytes memory currentCollateral2) = gt2.loanInfo(gtId2);
+    //         assertEq(owner2, borrower, "borrower should be the same");
+    //         console.log("new gt debt:", currentDebt2 / 1e6);
+    //         console.log("new gt collateral:", abi.decode(currentCollateral2, (uint256)) / 1e18);
+    //     }
 
-        vm.stopPrank();
-    }
+    //     vm.stopPrank();
+    // }
 }

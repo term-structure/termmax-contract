@@ -17,8 +17,9 @@ pragma solidity ^0.8.27;
  */
 import {Ownable2Step, Ownable} from "@openzeppelin/contracts/access/Ownable2Step.sol";
 import {AggregatorV3Interface, IOracleV1Plus} from "./IOracleV1Plus.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 
-contract OracleAggregatorV1Plus is IOracleV1Plus, Ownable2Step {
+contract OracleAggregatorV1Plus is IOracleV1Plus, Ownable2Step, VersionV1Plus {
     /// @notice The timelock period in seconds that must elapse before pending oracles can be accepted
     /// @dev Immutable value set during contract construction for security
     uint256 internal immutable _timeLock;
