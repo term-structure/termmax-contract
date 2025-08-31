@@ -245,6 +245,9 @@ abstract contract AbstractGearingTokenV1Plus is
             }
             LoanInfo memory loan = loanMapping[id];
             if (i != 0) {
+                if (id == newId) {
+                    revert GearingTokenErrorsV1Plus.DuplicateIdInMerge(id);
+                }
                 firstLoan.debtAmt += loanMapping[id].debtAmt;
                 firstLoan.collateralData = _mergeCollateral(firstLoan.collateralData, loan.collateralData);
                 _burnInternal(id);
