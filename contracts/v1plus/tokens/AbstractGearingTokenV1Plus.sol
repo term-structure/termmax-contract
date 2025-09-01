@@ -18,6 +18,7 @@ import {GtConfig, IOracle} from "../../v1/storage/TermMaxStorage.sol";
 import {IGearingTokenV1Plus} from "./IGearingTokenV1Plus.sol";
 import {GearingTokenEventsV1Plus} from "../events/GearingTokenEventsV1Plus.sol";
 import {GearingTokenErrorsV1Plus} from "../errors/GearingTokenErrorsV1Plus.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 /**
  * @title TermMax Gearing Token
  * @author Term Structure Labs
@@ -30,7 +31,8 @@ abstract contract AbstractGearingTokenV1Plus is
     IGearingToken,
     IGearingTokenV1Plus,
     GearingTokenErrors,
-    GearingTokenEvents
+    GearingTokenEvents,
+    VersionV1Plus
 {
     using SafeCast for uint256;
     using SafeCast for int256;
@@ -243,6 +245,9 @@ abstract contract AbstractGearingTokenV1Plus is
             }
             LoanInfo memory loan = loanMapping[id];
             if (i != 0) {
+                if (id == newId) {
+                    revert GearingTokenErrorsV1Plus.DuplicateIdInMerge(id);
+                }
                 firstLoan.debtAmt += loanMapping[id].debtAmt;
                 firstLoan.collateralData = _mergeCollateral(firstLoan.collateralData, loan.collateralData);
                 _burnInternal(id);

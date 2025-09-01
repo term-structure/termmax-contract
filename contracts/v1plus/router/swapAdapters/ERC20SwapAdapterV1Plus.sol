@@ -6,13 +6,14 @@ import {TransferUtilsV1Plus} from "../../lib/TransferUtilsV1Plus.sol";
 import {IERC20SwapAdapter} from "../IERC20SwapAdapter.sol";
 import {OnlyProxyCall} from "../../lib/OnlyProxyCall.sol";
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
+import {VersionV1Plus} from "../../VersionV1Plus.sol";
 
 /**
  * @title TermMax ERC20SwapAdapter V1Plus
  * @author Term Structure Labs
  * @notice This contract is an abstract base for ERC20 swap adapters in the TermMax protocol.
  */
-abstract contract ERC20SwapAdapterV1Plus is IERC20SwapAdapter, OnlyProxyCall {
+abstract contract ERC20SwapAdapterV1Plus is IERC20SwapAdapter, OnlyProxyCall, VersionV1Plus {
     using TransferUtilsV1Plus for IERC20;
 
     /// @notice Error for less than min token out

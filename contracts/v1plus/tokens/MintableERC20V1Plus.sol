@@ -3,12 +3,13 @@ pragma solidity ^0.8.27;
 
 import {IMintableERC20V1Plus} from "./IMintableERC20V1Plus.sol";
 import {MintableERC20} from "../../v1/tokens/MintableERC20.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 
 /**
  * @title TermMax ERC20 token
  * @author Term Structure Labs
  */
-contract MintableERC20V1Plus is MintableERC20, IMintableERC20V1Plus {
+contract MintableERC20V1Plus is MintableERC20, IMintableERC20V1Plus, VersionV1Plus {
     /**
      * @inheritdoc IMintableERC20V1Plus
      */

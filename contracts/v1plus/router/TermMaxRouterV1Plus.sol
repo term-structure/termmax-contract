@@ -2,7 +2,6 @@
 pragma solidity ^0.8.27;
 
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {IERC721Enumerable} from "@openzeppelin/contracts/interfaces/IERC721Enumerable.sol";
 import {IERC721Receiver} from "@openzeppelin/contracts/interfaces/IERC721Receiver.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import {PausableUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
@@ -22,7 +21,7 @@ import {IFlashLoanReceiver} from "../../v1/IFlashLoanReceiver.sol";
 import {IFlashRepayer} from "../../v1/tokens/IFlashRepayer.sol";
 import {ITermMaxRouterV1Plus} from "./ITermMaxRouterV1Plus.sol";
 import {IGearingToken} from "../../v1/tokens/IGearingToken.sol";
-import {IGearingTokenV1Plus} from "../tokens/IGearingTokenV1Plus.sol";
+// import {IGearingTokenV1Plus} from "../tokens/IGearingTokenV1Plus.sol";
 import {CurveCuts, OrderConfig} from "../../v1/storage/TermMaxStorage.sol";
 import {Constants} from "../../v1/lib/Constants.sol";
 import {IERC20SwapAdapter} from "./IERC20SwapAdapter.sol";
@@ -30,6 +29,7 @@ import {RouterEventsV1Plus} from "../events/RouterEventsV1Plus.sol";
 import {RouterErrorsV1Plus} from "../errors/RouterErrorsV1Plus.sol";
 import {TransferUtilsV1Plus} from "../lib/TransferUtilsV1Plus.sol";
 import {ArrayUtilsV1Plus} from "../lib/ArrayUtilsV1Plus.sol";
+import {VersionV1Plus} from "../VersionV1Plus.sol";
 
 /**
  * @title TermMax Router V1Plus
@@ -44,7 +44,8 @@ contract TermMaxRouterV1Plus is
     IERC721Receiver,
     ITermMaxRouterV1Plus,
     RouterErrors,
-    RouterEvents
+    RouterEvents,
+    VersionV1Plus
 {
     using SafeCast for *;
     using TransferUtilsV1Plus for IERC20;
@@ -104,27 +105,6 @@ contract TermMaxRouterV1Plus is
     function setAdapterWhitelist(address adapter, bool isWhitelist) external onlyOwner {
         adapterWhitelist[adapter] = isWhitelist;
         emit UpdateSwapAdapterWhiteList(adapter, isWhitelist);
-    }
-
-    function assetsWithERC20Collateral(ITermMaxMarket market, address owner)
-        external
-        view
-        returns (IERC20[4] memory tokens, uint256[4] memory balances, address gtAddr, uint256[] memory gtIds)
-    {
-        (IERC20 ft, IERC20 xt, IGearingToken gt, address collateral, IERC20 underlying) = market.tokens();
-        tokens[0] = ft;
-        tokens[1] = xt;
-        tokens[2] = IERC20(collateral);
-        tokens[3] = underlying;
-        for (uint256 i = 0; i < 4; ++i) {
-            balances[i] = tokens[i].balanceOf(owner);
-        }
-        gtAddr = address(gt);
-        uint256 balance = IERC721Enumerable(gtAddr).balanceOf(owner);
-        gtIds = new uint256[](balance);
-        for (uint256 i = 0; i < balance; ++i) {
-            gtIds[i] = IERC721Enumerable(gtAddr).tokenOfOwnerByIndex(owner, i);
-        }
     }
 
     function swapExactTokenToToken(
@@ -409,36 +389,36 @@ contract TermMaxRouterV1Plus is
         debtToken.safeTransfer(recipient, netTokenOut);
     }
 
-    function flashRepayFromCollV1Plus(
-        address recipient,
-        ITermMaxMarket market,
-        uint256 gtId,
-        uint128 repayAmt,
-        bool byDebtToken,
-        uint256 expectedOutput,
-        bytes memory removedCollateral,
-        SwapUnit[] memory units,
-        TermMaxSwapData memory swapData
-    ) external whenNotPaused noCallbackReentrant returns (uint256 netTokenOut) {
-        (,, IGearingToken gtToken,, IERC20 debtToken) = market.tokens();
-        assembly {
-            tstore(T_CALLBACK_ADDRESS_STORE, gtToken) // set callback address
-        }
-        gtToken.safeTransferFrom(msg.sender, address(this), gtId, "");
-        bytes memory callbackData = abi.encode(units, swapData);
-        callbackData = abi.encode(FlashRepayOptions.REPAY, callbackData);
-        bool repayAll = IGearingTokenV1Plus(address(gtToken)).flashRepay(
-            gtId, repayAmt, byDebtToken, removedCollateral, callbackData
-        );
-        if (!repayAll) {
-            gtToken.safeTransferFrom(address(this), msg.sender, gtId);
-        }
-        netTokenOut = debtToken.balanceOf(address(this));
-        if (netTokenOut < expectedOutput) {
-            revert InsufficientTokenOut(address(debtToken), expectedOutput, netTokenOut);
-        }
-        debtToken.safeTransfer(recipient, netTokenOut);
-    }
+    // function flashRepayFromCollV1Plus(
+    //     address recipient,
+    //     ITermMaxMarket market,
+    //     uint256 gtId,
+    //     uint128 repayAmt,
+    //     bool byDebtToken,
+    //     uint256 expectedOutput,
+    //     bytes memory removedCollateral,
+    //     SwapUnit[] memory units,
+    //     TermMaxSwapData memory swapData
+    // ) external whenNotPaused noCallbackReentrant returns (uint256 netTokenOut) {
+    //     (,, IGearingToken gtToken,, IERC20 debtToken) = market.tokens();
+    //     assembly {
+    //         tstore(T_CALLBACK_ADDRESS_STORE, gtToken) // set callback address
+    //     }
+    //     gtToken.safeTransferFrom(msg.sender, address(this), gtId, "");
+    //     bytes memory callbackData = abi.encode(units, swapData);
+    //     callbackData = abi.encode(FlashRepayOptions.REPAY, callbackData);
+    //     bool repayAll = IGearingTokenV1Plus(address(gtToken)).flashRepay(
+    //         gtId, repayAmt, byDebtToken, removedCollateral, callbackData
+    //     );
+    //     if (!repayAll) {
+    //         gtToken.safeTransferFrom(address(this), msg.sender, gtId);
+    //     }
+    //     netTokenOut = debtToken.balanceOf(address(this));
+    //     if (netTokenOut < expectedOutput) {
+    //         revert InsufficientTokenOut(address(debtToken), expectedOutput, netTokenOut);
+    //     }
+    //     debtToken.safeTransfer(recipient, netTokenOut);
+    // }
 
     function repayByTokenThroughFt(
         address recipient,
@@ -493,26 +473,6 @@ contract TermMaxRouterV1Plus is
         repayToken.safeTransferFrom(msg.sender, address(this), repayAmt);
         repayToken.safeIncreaseAllowance(address(gt), repayAmt);
         gt.repay(gtId, repayAmt, byDebtToken);
-    }
-
-    function redeemAndSwap(
-        address recipient,
-        ITermMaxMarket market,
-        uint256 ftAmount,
-        SwapUnit[] memory units,
-        uint256 minTokenOut
-    ) external whenNotPaused returns (uint256) {
-        (IERC20 ft,,,, IERC20 debtToken) = market.tokens();
-        ft.safeTransferFrom(msg.sender, address(this), ftAmount);
-        ft.safeIncreaseAllowance(address(market), ftAmount);
-        (uint256 redeemedAmt, bytes memory collateralData) = market.redeem(ftAmount, address(this));
-        redeemedAmt += _doSwap(_decodeAmount(collateralData), units);
-        if (redeemedAmt < minTokenOut) {
-            revert InsufficientTokenOut(address(debtToken), minTokenOut, redeemedAmt);
-        }
-        debtToken.safeTransfer(recipient, redeemedAmt);
-        emit RedeemAndSwap(market, ftAmount, msg.sender, recipient, redeemedAmt);
-        return redeemedAmt;
     }
 
     /**
@@ -615,53 +575,53 @@ contract TermMaxRouterV1Plus is
         }
     }
 
-    /**
-     * @inheritdoc ITermMaxRouterV1Plus
-     */
-    function rolloverGtV1Plus(
-        address recipient,
-        IGearingToken gtToken,
-        uint256 gtId,
-        uint128 repayAmt,
-        uint128 additionalAssets,
-        uint256 removedCollateral,
-        SwapUnit[] memory units,
-        ITermMaxMarket nextMarket,
-        uint256 additionalNextCollateral,
-        TermMaxSwapData memory swapData,
-        uint128 maxLtv
-    ) external whenNotPaused noCallbackReentrant returns (uint256 newGtId) {
-        assembly {
-            // set callback address
-            tstore(T_CALLBACK_ADDRESS_STORE, gtToken)
-            // clear ts stograge
-            tstore(T_ROLLOVER_GT_RESERVE_STORE, 0)
-        }
-        // additional debt token to reduce the ltv
-        if (additionalAssets != 0) {
-            IERC20(swapData.tokenOut).safeTransferFrom(msg.sender, address(this), additionalAssets);
-        }
-        // additional collateral to reduce the ltv
-        if (additionalNextCollateral != 0) {
-            IERC20(units[units.length - 1].tokenOut).safeTransferFrom(
-                msg.sender, address(this), additionalNextCollateral
-            );
-        }
-        gtToken.safeTransferFrom(msg.sender, address(this), gtId, "");
-        bytes memory callbackData =
-            abi.encode(recipient, maxLtv, additionalAssets, nextMarket, additionalNextCollateral, units, swapData);
-        callbackData = abi.encode(FlashRepayOptions.ROLLOVER, callbackData);
-        if (
-            !IGearingTokenV1Plus(address(gtToken)).flashRepay(
-                gtId, repayAmt, true, abi.encode(removedCollateral), callbackData
-            )
-        ) {
-            gtToken.safeTransferFrom(address(this), recipient, gtId);
-        }
-        assembly {
-            newGtId := tload(T_ROLLOVER_GT_RESERVE_STORE)
-        }
-    }
+    // /**
+    //  * @inheritdoc ITermMaxRouterV1Plus
+    //  */
+    // function rolloverGtV1Plus(
+    //     address recipient,
+    //     IGearingToken gtToken,
+    //     uint256 gtId,
+    //     uint128 repayAmt,
+    //     uint128 additionalAssets,
+    //     uint256 removedCollateral,
+    //     SwapUnit[] memory units,
+    //     ITermMaxMarket nextMarket,
+    //     uint256 additionalNextCollateral,
+    //     TermMaxSwapData memory swapData,
+    //     uint128 maxLtv
+    // ) external whenNotPaused noCallbackReentrant returns (uint256 newGtId) {
+    //     assembly {
+    //         // set callback address
+    //         tstore(T_CALLBACK_ADDRESS_STORE, gtToken)
+    //         // clear ts stograge
+    //         tstore(T_ROLLOVER_GT_RESERVE_STORE, 0)
+    //     }
+    //     // additional debt token to reduce the ltv
+    //     if (additionalAssets != 0) {
+    //         IERC20(swapData.tokenOut).safeTransferFrom(msg.sender, address(this), additionalAssets);
+    //     }
+    //     // additional collateral to reduce the ltv
+    //     if (additionalNextCollateral != 0) {
+    //         IERC20(units[units.length - 1].tokenOut).safeTransferFrom(
+    //             msg.sender, address(this), additionalNextCollateral
+    //         );
+    //     }
+    //     gtToken.safeTransferFrom(msg.sender, address(this), gtId, "");
+    //     bytes memory callbackData =
+    //         abi.encode(recipient, maxLtv, additionalAssets, nextMarket, additionalNextCollateral, units, swapData);
+    //     callbackData = abi.encode(FlashRepayOptions.ROLLOVER, callbackData);
+    //     if (
+    //         !IGearingTokenV1Plus(address(gtToken)).flashRepay(
+    //             gtId, repayAmt, true, abi.encode(removedCollateral), callbackData
+    //         )
+    //     ) {
+    //         gtToken.safeTransferFrom(address(this), recipient, gtId);
+    //     }
+    //     assembly {
+    //         newGtId := tload(T_ROLLOVER_GT_RESERVE_STORE)
+    //     }
+    // }
 
     /// @dev Market flash leverage flashloan callback
     function executeOperation(address, IERC20, uint256 amount, bytes memory data)

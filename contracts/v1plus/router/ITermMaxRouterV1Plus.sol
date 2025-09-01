@@ -46,17 +46,17 @@ interface ITermMaxRouterV1Plus {
         TermMaxSwapData memory swapData
     ) external returns (uint256 netTokenOut);
 
-    function flashRepayFromCollV1Plus(
-        address recipient,
-        ITermMaxMarket market,
-        uint256 gtId,
-        uint128 repayAmt,
-        bool byDebtToken,
-        uint256 expectedOutput,
-        bytes memory removedCollateral,
-        SwapUnit[] memory units,
-        TermMaxSwapData memory swapData
-    ) external returns (uint256 netTokenOut);
+    // function flashRepayFromCollV1Plus(
+    //     address recipient,
+    //     ITermMaxMarket market,
+    //     uint256 gtId,
+    //     uint128 repayAmt,
+    //     bool byDebtToken,
+    //     uint256 expectedOutput,
+    //     bytes memory removedCollateral,
+    //     SwapUnit[] memory units,
+    //     TermMaxSwapData memory swapData
+    // ) external returns (uint256 netTokenOut);
 
     /**
      * @notice Repays debt
@@ -96,35 +96,35 @@ interface ITermMaxRouterV1Plus {
         uint128 maxLtv
     ) external returns (uint256 newGtId);
 
-    /**
-     * @notice Rollover GT position to a new market with additional assets(allow partial rollover)
-     * @dev This function allows users to rollover their GT position to a new market
-     * @param recipient The address that will receive the new GT token
-     * @param gt The GearingToken contract instance
-     * @param gtId The ID of the GT token being rolled over
-     * @param repayAmt Amount of debt to repay
-     * @param additionalAssets Amount of additional assets to add to the position
-     * @param removedCollateral Amount of collateral to remove from the position
-     * @param units Array of swap units defining the external swap path
-     * @param nextMarket The next market to rollover into
-     * @param additionalNextCollateral Additional collateral for the next market
-     * @param swapData Data for the termmax swap operation
-     * @param maxLtv Maximum loan-to-value ratio for the rollover
-     * @return newGtId The ID of the newly created GT token in the next market
-     */
-    function rolloverGtV1Plus(
-        address recipient,
-        IGearingToken gt,
-        uint256 gtId,
-        uint128 repayAmt,
-        uint128 additionalAssets,
-        uint256 removedCollateral,
-        SwapUnit[] memory units,
-        ITermMaxMarket nextMarket,
-        uint256 additionalNextCollateral,
-        TermMaxSwapData memory swapData,
-        uint128 maxLtv
-    ) external returns (uint256 newGtId);
+    // /**
+    //  * @notice Rollover GT position to a new market with additional assets(allow partial rollover)
+    //  * @dev This function allows users to rollover their GT position to a new market
+    //  * @param recipient The address that will receive the new GT token
+    //  * @param gt The GearingToken contract instance
+    //  * @param gtId The ID of the GT token being rolled over
+    //  * @param repayAmt Amount of debt to repay
+    //  * @param additionalAssets Amount of additional assets to add to the position
+    //  * @param removedCollateral Amount of collateral to remove from the position
+    //  * @param units Array of swap units defining the external swap path
+    //  * @param nextMarket The next market to rollover into
+    //  * @param additionalNextCollateral Additional collateral for the next market
+    //  * @param swapData Data for the termmax swap operation
+    //  * @param maxLtv Maximum loan-to-value ratio for the rollover
+    //  * @return newGtId The ID of the newly created GT token in the next market
+    //  */
+    // function rolloverGtV1Plus(
+    //     address recipient,
+    //     IGearingToken gt,
+    //     uint256 gtId,
+    //     uint128 repayAmt,
+    //     uint128 additionalAssets,
+    //     uint256 removedCollateral,
+    //     SwapUnit[] memory units,
+    //     ITermMaxMarket nextMarket,
+    //     uint256 additionalNextCollateral,
+    //     TermMaxSwapData memory swapData,
+    //     uint128 maxLtv
+    // ) external returns (uint256 newGtId);
 
     /**
      * @notice Places an order and mints a GT token(The gt token will not be linked to the order)
