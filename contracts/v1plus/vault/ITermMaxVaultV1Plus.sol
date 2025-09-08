@@ -5,7 +5,6 @@ import {IERC4626} from "@openzeppelin/contracts/interfaces/IERC4626.sol";
 import {PendingAddress, PendingUint192} from "../../v1/lib/PendingLib.sol";
 import {VaultInitialParamsV1Plus} from "../storage/TermMaxStorageV1Plus.sol";
 
-
 /**
  * @title ITermMaxVaultV1Plus
  * @notice Interface for TermMax Vault V1Plus contract
