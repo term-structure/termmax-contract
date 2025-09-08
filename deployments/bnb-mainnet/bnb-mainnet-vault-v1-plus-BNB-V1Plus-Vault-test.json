@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0xb880c6042a6a8db6185894058ffd25f446a7826b"
+  },
+  "blockInfo": {
+    "network": "bnb-mainnet",
+    "blockNumber": "56896489",
+    "timestamp": "1754670435"
+  },
+  "vaultInfo": {
+    "name": "BNB V1Plus Vault test",
+    "symbol": "BNB-V1Plus-Vault-test",
+    "address": "0xF9E8d54dC938111d1693Ae96872cdef138BA74b4",
+    "asset": "0x55d398326f99059fF775485246999027B3197955",
+    "performanceFeeRate": 20000000,
+    "minApy": 1000000,
+    "minIdleFundRate": 10000000,
+    "maxCapacity": "1000000000000",
+    "timelock": 60,
+    "admin": "0x9498764f0c62257B83A04e2A757De30908EC793d",
+    "curator": "0x5eC5CB94D271E59f5dfF5A574851ba84Ee713f3D",
+    "guardian": "0xaAC1EDD499Dc45388dBb43aAA1663A70D43746F3",
+  }
+}

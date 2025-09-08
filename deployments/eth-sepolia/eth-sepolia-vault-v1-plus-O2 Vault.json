@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0xb43d74bacd57e9abd1b241362ae4a5ff4a49aeb0"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "9009230",
+    "timestamp": "1755497820"
+  },
+  "vaultInfo": {
+    "name": "O2 Vault",
+    "symbol": "O2 Vault",
+    "address": "0xE5a7AbB9143C31F3C439d04B7a77f29F5B7810cf",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 10000000,
+    "minApy": 1000000,
+    "minIdleFundRate": 10000000,
+    "maxCapacity": "500000000000000",
+    "timelock": 60,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0x5DaFC00056B4EAc0cb593Cf2E5eA84084A74eaf4",
+    "guardian": "0xA0f577D8d168EC99326A41Eb33757f6af3227233",
+  }
+}

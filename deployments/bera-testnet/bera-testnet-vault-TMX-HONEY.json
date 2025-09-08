@@ -1,0 +1,24 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x22f532e8eeb9575a11ea768217d9c6a9b0a22f7e"
+  },
+  "blockInfo": {
+    "network": "bera-testnet",
+    "blockNumber": "6223780",
+    "timestamp": "1751620732"
+  },
+  "vaultInfo": {
+    "name": "TermMax Honey Vault",
+    "symbol": "TMX-HONEY",
+    "address": "0x87745b23A1AA02fecd6cE0F623CA9f6295852004",
+    "asset": "0xD89721502BECE8Afc055825b95C4e4458e618cf2",
+    "performanceFeeRate": 10000000,
+    "maxCapacity": "50000000000000",
+    "timelock": 1,
+    "admin": "0xF28546cFbBBB0474aa77ec692e35AbebB6ba98E1",
+    "curator": "0x2A58A3D405c527491Daae4C62561B949e7F87EFE",
+    "guardian": "0x2A58A3D405c527491Daae4C62561B949e7F87EFE",
+    "allocator": "0x2A58A3D405c527491Daae4C62561B949e7F87EFE"
+  }
+}

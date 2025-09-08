@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0x26b17abc3bb32de6ab0525ef2dd350da0fa6d288"
+  },
+  "blockInfo": {
+    "number": "8916648",
+    "timestamp": "1754379528"
+  },
+  "market": "0x0Ccb2fede9D7CbaA42bfAb50D6b57763584d9d85",
+  "collateral": {
+    "address": "0x5C4045Efc806c1c84ED05334B9AF00ad9A4c0d9B",
+    "symbol": "PT-sUSDE-25SEP2025",
+    "priceFeed": "0x7AD1a7a220842B50Df61Fce50B284f2eD4f5826C",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "symbol": "USDC",
+    "priceFeed": "0x189E833580D9D643132EEcB3f5547F899084EB83",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0x7edEEF405E63813AC61E08BE83079D9BcD835d59",
+    "xt": "0x3ad2380fE5AcC048C7713f544e1D7e96dAb2596A",
+    "gt": "0xca10F035e2b6eBA6Aa9bA0eE6F1A2a2b1B5B2cfe"
+  },
+  "config": {
+    "marketSymbol": "USDC/PT-sUSDE-25SEP2025@01SEP2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "26SEP2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "1000000",
+      "mintGtFeeRef": "400000"
+    }
+  }
+}

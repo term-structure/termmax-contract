@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x3421f05baaf5d0e2cf8d33e33f33a7dd7d778f47"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "8940590",
+    "timestamp": "1754668128"
+  },
+  "vaultInfo": {
+    "name": "F2 Vault",
+    "symbol": "F2 Vault",
+    "address": "0x9ADd0081d2d47D2256d8cF1ea4BCe3179Eab95E5",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 10000000,
+    "minApy": 0,
+    "minIdleFundRate": 0,
+    "maxCapacity": "50000000000000",
+    "timelock": 300,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0xea538231Ea9661b66Fc3A8C793e992AbC88c7b02",
+    "guardian": "0x1e33FCa0b3A3305f1560520857d5E24854Fc5E5c",
+  }
+}

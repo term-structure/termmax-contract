@@ -1,0 +1,24 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x80b1348c0ade5b96361bd9cb3d5b53ff75d828ea"
+  },
+  "blockInfo": {
+    "network": "arb-sepolia",
+    "blockNumber": "8689628",
+    "timestamp": "1751622327"
+  },
+  "vaultInfo": {
+    "name": "TermMax USDC Vault",
+    "symbol": "TMX-USDC",
+    "address": "0x318E0C4360879d4d98Beda7b6401732Bf945931B",
+    "asset": "0xE7e6EA2B6A1D7E7d80727290a86CCC9FE5fbe0C1",
+    "performanceFeeRate": 10000000,
+    "maxCapacity": "50000000000000",
+    "timelock": 1,
+    "admin": "0x0709F8B7BdEA284C7352A5b12505f3d70BF9C21b",
+    "curator": "0x2A58A3D405c527491Daae4C62561B949e7F87EFE",
+    "guardian": "0x2A58A3D405c527491Daae4C62561B949e7F87EFE",
+    "allocator": "0x2A58A3D405c527491Daae4C62561B949e7F87EFE"
+  }
+}

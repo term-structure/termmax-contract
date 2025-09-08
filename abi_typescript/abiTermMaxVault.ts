@@ -199,7 +199,7 @@ export const abiTermMaxVault = [
     name: 'badDebtMapping',
     inputs: [
       {
-        name: 'order',
+        name: 'collateral',
         type: 'address',
         internalType: 'address',
       },

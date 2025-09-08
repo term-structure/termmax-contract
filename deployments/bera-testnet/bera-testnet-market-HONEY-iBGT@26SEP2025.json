@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0x22f532e8eeb9575a11ea768217d9c6a9b0a22f7e"
+  },
+  "blockInfo": {
+    "number": "6222879",
+    "timestamp": "1751619106"
+  },
+  "market": "0x5eBa214E3B07a69a72Ed25726eeF6a5e7CbE1f29",
+  "collateral": {
+    "address": "0x7a694ee7a157038b1600dAefe45ff362E0734169",
+    "symbol": "iBGT",
+    "priceFeed": "0xf6cFdB3889D798AdBa447d00Ac08bD56f56f2eC6",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0xD89721502BECE8Afc055825b95C4e4458e618cf2",
+    "symbol": "HONEY",
+    "priceFeed": "0x7FDE7c4B005CACA2e9C05CbFdb0ED68F7Fe50807",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0xe769B4D078a341aBa16Bd688d3D79726B01d84b3",
+    "xt": "0x27AE17c3b763828a2Df4C8f88a3ef63c25381Ae3",
+    "gt": "0x5e73bAbE6f6ACFa7E5d04ccaA10482E915BAae6A"
+  },
+  "config": {
+    "marketSymbol": "HONEY/iBGT@26SEP2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "26SEP2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "10000000",
+      "mintGtFeeRef": "6000000"
+    }
+  }
+}

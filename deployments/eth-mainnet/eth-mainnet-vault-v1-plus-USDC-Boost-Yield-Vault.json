@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0xfb6b3f622684e59bb1606f371087c15e3451cfe7"
+  },
+  "blockInfo": {
+    "network": "eth-mainnet",
+    "blockNumber": "23187680",
+    "timestamp": "1755757859"
+  },
+  "vaultInfo": {
+    "name": "USDC Boost Yield Vault",
+    "symbol": "USDC-Boost-Yield-Vault",
+    "address": "0x0d6B6280915313E7322dcB4D71D511a93a75D98d",
+    "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "performanceFeeRate": 10000000,
+    "minApy": 1000000,
+    "minIdleFundRate": 10000000,
+    "maxCapacity": "50000000000000",
+    "timelock": 86400,
+    "admin": "0xDA4aAF85Bb924B53DCc2DFFa9e1A9C2Ef97aCFDF",
+    "curator": "0x313660F9b9bdF5E061dE7892C7927208E4F8080F",
+    "guardian": "0x20d4E208E8135cd72Cc4f44ff1448635dff34a37",
+  }
+}

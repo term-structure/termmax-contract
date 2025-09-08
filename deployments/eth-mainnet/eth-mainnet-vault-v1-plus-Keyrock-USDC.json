@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x30cece488169c698a25ec75bc168ab87e807f1a6"
+  },
+  "blockInfo": {
+    "network": "eth-mainnet",
+    "blockNumber": "23200493",
+    "timestamp": "1755912395"
+  },
+  "vaultInfo": {
+    "name": "Keyrock USDC",
+    "symbol": "Keyrock-USDC",
+    "address": "0xf4B8dCD6509B3Cb87DA9C491cB0728a2F3088d3F",
+    "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "performanceFeeRate": 10000000,
+    "minApy": 1000000,
+    "minIdleFundRate": 10000000,
+    "maxCapacity": "100000000000000",
+    "timelock": 86400,
+    "admin": "0xDA4aAF85Bb924B53DCc2DFFa9e1A9C2Ef97aCFDF",
+    "curator": "0x67460001C991708c6A6BAFc511a60c2E414D7Ecf",
+    "guardian": "0xf1a9676B03Dd3B2066214D2aD8B4B59ED6642C53",
+  }
+}

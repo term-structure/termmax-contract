@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0x22f532e8eeb9575a11ea768217d9c6a9b0a22f7e"
+  },
+  "blockInfo": {
+    "number": "6222879",
+    "timestamp": "1751619106"
+  },
+  "market": "0xB1cAb9D6CF81014f8B0018f4617dd63c81Ca4E9e",
+  "collateral": {
+    "address": "0xf280A2cf174616f4Aee3fF84db3FCf83f5d97cC2",
+    "symbol": "WBTC",
+    "priceFeed": "0xd06a83Eb8f9081e15b0c159C737ACa781545de2d",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0xD89721502BECE8Afc055825b95C4e4458e618cf2",
+    "symbol": "HONEY",
+    "priceFeed": "0x7FDE7c4B005CACA2e9C05CbFdb0ED68F7Fe50807",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0x10EfE0101C42437B882A4116209CCc25343e73D0",
+    "xt": "0x79b14C8c0623E61Cb1b983ef1985D460C93605BD",
+    "gt": "0x7E3BcC5Cc7aD6252D634B436FE7B9F404525a5ef"
+  },
+  "config": {
+    "marketSymbol": "HONEY/WBTC@26SEP2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "26SEP2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "10000000",
+      "mintGtFeeRef": "6000000"
+    }
+  }
+}

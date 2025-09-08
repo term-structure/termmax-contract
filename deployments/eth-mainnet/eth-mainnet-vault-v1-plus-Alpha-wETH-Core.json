@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x9e12e35d89f9f78f2253d60754a83f688c9a8346"
+  },
+  "blockInfo": {
+    "network": "eth-mainnet",
+    "blockNumber": "23139581",
+    "timestamp": "1755178103"
+  },
+  "vaultInfo": {
+    "name": "Alpha wETH Core",
+    "symbol": "Alpha-wETH-Core",
+    "address": "0x09400F3A0B358eb408060F5A3272ED7e3b7664e0",
+    "asset": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "performanceFeeRate": 10000000,
+    "minApy": 1000000,
+    "minIdleFundRate": 10000000,
+    "maxCapacity": "100000000000000000000000000",
+    "timelock": 86400,
+    "admin": "0xDA4aAF85Bb924B53DCc2DFFa9e1A9C2Ef97aCFDF",
+    "curator": "0xEB4Af6fA3AFA08B10d593EC8fF87efB03BC04645",
+    "guardian": "0x8cF8AA7805dd315372D5B9899554E5F1C4E35540",
+  }
+}

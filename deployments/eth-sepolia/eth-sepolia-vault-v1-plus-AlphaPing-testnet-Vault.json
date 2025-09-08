@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x26b17abc3bb32de6ab0525ef2dd350da0fa6d288"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "8916722",
+    "timestamp": "1754380416"
+  },
+  "vaultInfo": {
+    "name": "AlphaPing-testnet-Vault",
+    "symbol": "AlphaPing-testnet-Vault",
+    "address": "0x39acCd1123905d340471c58352Ac2c047Fb0CE43",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 10000000,
+    "minApy": 0,
+    "minIdleFundRate": 0,
+    "maxCapacity": "50000000000000",
+    "timelock": 86400,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0x141D81ebfb99189c627059898D457d683EF37908",
+    "guardian": "0xFff48Ef9a56acA306E4c52c42f52D8f0dea2bA12",
+  }
+}

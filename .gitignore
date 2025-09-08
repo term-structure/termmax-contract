@@ -45,3 +45,5 @@ ignition/deployments/chain-31337
 # Soldeer
 /dependencies
 soldeer.lock
+
+script/ts-script

@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0x22f532e8eeb9575a11ea768217d9c6a9b0a22f7e"
+  },
+  "blockInfo": {
+    "number": "6222879",
+    "timestamp": "1751619106"
+  },
+  "market": "0x1fb6352FBDAb62D60689F792fE7bc1597De9F321",
+  "collateral": {
+    "address": "0xc5D2e577e2529a00d77274f21f311beaD261354E",
+    "symbol": "LBTC",
+    "priceFeed": "0xe2BfDE486bd94f77DFcD1fE9ae1A3F3BF1f074bd",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0xD89721502BECE8Afc055825b95C4e4458e618cf2",
+    "symbol": "HONEY",
+    "priceFeed": "0x7FDE7c4B005CACA2e9C05CbFdb0ED68F7Fe50807",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0x19363b57dA81B3d62aDba76a47e39Cd6D27098b1",
+    "xt": "0x08271cBF2dD06DC2FDDc4ed7DD94DEfc63DDEe93",
+    "gt": "0xb58b2b1a0733205b17fec26554CF625286E46654"
+  },
+  "config": {
+    "marketSymbol": "HONEY/LBTC@26SEP2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "26SEP2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "10000000",
+      "mintGtFeeRef": "6000000"
+    }
+  }
+}

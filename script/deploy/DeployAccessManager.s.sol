@@ -69,7 +69,7 @@ contract DeployAccessManager is DeployBase {
                 '  "gitBranch": "',
                 getGitBranch(),
                 '",\n',
-                '  "gitCommitHash": "0x',
+                '  "gitCommitHash": "',
                 vm.toString(getGitCommitHash()),
                 '",\n',
                 '  "blockInfo": {\n',

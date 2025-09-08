@@ -695,4 +695,224 @@ contract PreTMXTest is Test {
         assertEq(preTMX.owner(), newOwner);
         assertEq(preTMX.pendingOwner(), address(0));
     }
+
+    // ============ Transfer Restriction Matrix Tests ============
+    // Testing all 8 possible combinations of transfer restrictions
+
+    function test_TransferRestrictionCase1_GlobalDisabled_BothNotWhitelisted() public {
+        // Case 1: transferRestricted = false, from = false, to = false
+        // Expected: ALLOWED (global transfers enabled)
+
+        vm.startPrank(admin);
+        preTMX.enableTransfer(); // transferRestricted = false
+        preTMX.mint(user1, 1000);
+
+        // Ensure both are not whitelisted (default state)
+        preTMX.whitelistTransfer(user1, false, false);
+        preTMX.whitelistTransfer(user2, false, false);
+        vm.stopPrank();
+
+        // Transfer should succeed
+        vm.prank(user1);
+        bool success = preTMX.transfer(user2, 500);
+        assertTrue(success);
+        assertEq(preTMX.balanceOf(user2), 500);
+        assertEq(preTMX.balanceOf(user1), 500);
+    }
+
+    function test_TransferRestrictionCase2_GlobalDisabled_FromNotWhitelisted_ToWhitelisted() public {
+        // Case 2: transferRestricted = false, from = false, to = true
+        // Expected: ALLOWED (global transfers enabled)
+
+        vm.startPrank(admin);
+        preTMX.enableTransfer(); // transferRestricted = false
+        preTMX.mint(user1, 1000);
+
+        preTMX.whitelistTransfer(user1, false, false); // from not whitelisted
+        preTMX.whitelistTransfer(user2, false, true); // to whitelisted for receiving
+        vm.stopPrank();
+
+        // Transfer should succeed
+        vm.prank(user1);
+        bool success = preTMX.transfer(user2, 500);
+        assertTrue(success);
+        assertEq(preTMX.balanceOf(user2), 500);
+        assertEq(preTMX.balanceOf(user1), 500);
+    }
+
+    function test_TransferRestrictionCase3_GlobalDisabled_FromWhitelisted_ToNotWhitelisted() public {
+        // Case 3: transferRestricted = false, from = true, to = false
+        // Expected: ALLOWED (global transfers enabled)
+
+        vm.startPrank(admin);
+        preTMX.enableTransfer(); // transferRestricted = false
+        preTMX.mint(user1, 1000);
+
+        preTMX.whitelistTransfer(user1, true, false); // from whitelisted for sending
+        preTMX.whitelistTransfer(user2, false, false); // to not whitelisted
+        vm.stopPrank();
+
+        // Transfer should succeed
+        vm.prank(user1);
+        bool success = preTMX.transfer(user2, 500);
+        assertTrue(success);
+        assertEq(preTMX.balanceOf(user2), 500);
+        assertEq(preTMX.balanceOf(user1), 500);
+    }
+
+    function test_TransferRestrictionCase4_GlobalDisabled_BothWhitelisted() public {
+        // Case 4: transferRestricted = false, from = true, to = true
+        // Expected: ALLOWED (global transfers enabled)
+
+        vm.startPrank(admin);
+        preTMX.enableTransfer(); // transferRestricted = false
+        preTMX.mint(user1, 1000);
+
+        preTMX.whitelistTransfer(user1, true, false); // from whitelisted for sending
+        preTMX.whitelistTransfer(user2, false, true); // to whitelisted for receiving
+        vm.stopPrank();
+
+        // Transfer should succeed
+        vm.prank(user1);
+        bool success = preTMX.transfer(user2, 500);
+        assertTrue(success);
+        assertEq(preTMX.balanceOf(user2), 500);
+        assertEq(preTMX.balanceOf(user1), 500);
+    }
+
+    function test_TransferRestrictionCase5_GlobalEnabled_BothNotWhitelisted() public {
+        // Case 5: transferRestricted = true, from = false, to = false
+        // Expected: BLOCKED (the only case that blocks transfers)
+
+        vm.startPrank(admin);
+        // transferRestricted = true by default
+        preTMX.mint(user1, 1000);
+
+        // Ensure both are not whitelisted
+        preTMX.whitelistTransfer(user1, false, false);
+        preTMX.whitelistTransfer(user2, false, false);
+        vm.stopPrank();
+
+        // Transfer should fail
+        vm.prank(user1);
+        vm.expectRevert(abi.encodeWithSelector(PreTMX.TransferNotWhitelisted.selector, user1, user2));
+        preTMX.transfer(user2, 500);
+    }
+
+    function test_TransferRestrictionCase6_GlobalEnabled_FromNotWhitelisted_ToWhitelisted() public {
+        // Case 6: transferRestricted = true, from = false, to = true
+        // Expected: ALLOWED (recipient is whitelisted)
+
+        vm.startPrank(admin);
+        // transferRestricted = true by default
+        preTMX.mint(user1, 1000);
+
+        preTMX.whitelistTransfer(user1, false, false); // from not whitelisted
+        preTMX.whitelistTransfer(user2, false, true); // to whitelisted for receiving
+        vm.stopPrank();
+
+        // Transfer should succeed
+        vm.prank(user1);
+        bool success = preTMX.transfer(user2, 500);
+        assertTrue(success);
+        assertEq(preTMX.balanceOf(user2), 500);
+        assertEq(preTMX.balanceOf(user1), 500);
+    }
+
+    function test_TransferRestrictionCase7_GlobalEnabled_FromWhitelisted_ToNotWhitelisted() public {
+        // Case 7: transferRestricted = true, from = true, to = false
+        // Expected: ALLOWED (sender is whitelisted)
+
+        vm.startPrank(admin);
+        // transferRestricted = true by default
+        preTMX.mint(user1, 1000);
+
+        preTMX.whitelistTransfer(user1, true, false); // from whitelisted for sending
+        preTMX.whitelistTransfer(user2, false, false); // to not whitelisted
+        vm.stopPrank();
+
+        // Transfer should succeed
+        vm.prank(user1);
+        bool success = preTMX.transfer(user2, 500);
+        assertTrue(success);
+        assertEq(preTMX.balanceOf(user2), 500);
+        assertEq(preTMX.balanceOf(user1), 500);
+    }
+
+    function test_TransferRestrictionCase8_GlobalEnabled_BothWhitelisted() public {
+        // Case 8: transferRestricted = true, from = true, to = true
+        // Expected: ALLOWED (both parties whitelisted)
+
+        vm.startPrank(admin);
+        // transferRestricted = true by default
+        preTMX.mint(user1, 1000);
+
+        preTMX.whitelistTransfer(user1, true, false); // from whitelisted for sending
+        preTMX.whitelistTransfer(user2, false, true); // to whitelisted for receiving
+        vm.stopPrank();
+
+        // Transfer should succeed
+        vm.prank(user1);
+        bool success = preTMX.transfer(user2, 500);
+        assertTrue(success);
+        assertEq(preTMX.balanceOf(user2), 500);
+        assertEq(preTMX.balanceOf(user1), 500);
+    }
+
+    function test_TransferRestrictionMatrix_WithTransferFrom() public {
+        // Test the same logic with transferFrom to ensure consistency
+
+        vm.startPrank(admin);
+        preTMX.mint(user1, 2000);
+
+        // Case 5: Should fail (both not whitelisted, restrictions on)
+        preTMX.whitelistTransfer(user1, false, false);
+        preTMX.whitelistTransfer(user2, false, false);
+        vm.stopPrank();
+
+        vm.prank(user1);
+        preTMX.approve(admin, 1000);
+
+        vm.prank(admin);
+        vm.expectRevert(abi.encodeWithSelector(PreTMX.TransferNotWhitelisted.selector, user1, user2));
+        preTMX.transferFrom(user1, user2, 500);
+
+        // Case 6: Should succeed (recipient whitelisted)
+        vm.prank(admin);
+        preTMX.whitelistTransfer(user2, false, true);
+
+        vm.prank(admin);
+        bool success = preTMX.transferFrom(user1, user2, 500);
+        assertTrue(success);
+        assertEq(preTMX.balanceOf(user2), 500);
+    }
+
+    function test_TransferRestrictionMatrix_Summary() public {
+        // Summary test demonstrating the key insight: only 1 case blocks, 7 allow
+        uint256 blockedCases = 0;
+        uint256 allowedCases = 0;
+
+        // We can't easily loop through all cases in Solidity, but this test
+        // documents that out of 8 total combinations:
+        // - 7 cases allow transfers
+        // - 1 case blocks transfers (Case 5: restricted=true, from=false, to=false)
+
+        // The blocking case
+        vm.startPrank(admin);
+        preTMX.mint(user1, 1000);
+        preTMX.whitelistTransfer(user1, false, false);
+        preTMX.whitelistTransfer(user2, false, false);
+        vm.stopPrank();
+
+        vm.prank(user1);
+        try preTMX.transfer(user2, 100) {
+            allowedCases++;
+        } catch {
+            blockedCases++;
+        }
+
+        // Verify our expectation: this should be the blocked case
+        assertEq(blockedCases, 1);
+        assertEq(allowedCases, 0);
+    }
 }

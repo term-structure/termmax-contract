@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0x22f532e8eeb9575a11ea768217d9c6a9b0a22f7e"
+  },
+  "blockInfo": {
+    "number": "6222879",
+    "timestamp": "1751619106"
+  },
+  "market": "0x5356283dd5E09f13956F913AD11BEA697c9fd8c2",
+  "collateral": {
+    "address": "0xf50a5e67D90e3290A605E4f14BE9D62b5223D26d",
+    "symbol": "WBERA",
+    "priceFeed": "0x1a76D6718aD7c4E38B67964E5748f55211920D30",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0xD89721502BECE8Afc055825b95C4e4458e618cf2",
+    "symbol": "HONEY",
+    "priceFeed": "0x7FDE7c4B005CACA2e9C05CbFdb0ED68F7Fe50807",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0x27e4312A71732b280bADc029A8694a79D848f158",
+    "xt": "0xbB7E29F22C04b00d21D86487920112848AdBafFD",
+    "gt": "0xE67702988D57C1cF93f346497760bcE9f315c531"
+  },
+  "config": {
+    "marketSymbol": "HONEYWBERA@26SEP2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "26SEP2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "10000000",
+      "mintGtFeeRef": "6000000"
+    }
+  }
+}

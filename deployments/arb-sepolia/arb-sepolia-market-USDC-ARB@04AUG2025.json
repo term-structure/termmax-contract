@@ -1,0 +1,42 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commitHash": "0xb2cd3a7507bb74903296c2681b2b0027619708a1"
+  },
+  "blockInfo": {
+    "number": "8901274",
+    "timestamp": "1754194316"
+  },
+  "market": "0xc410DC9CE7eD5163DFdA61F2669719D7F651f8cA",
+  "collateral": {
+    "address": "0x4E919ba6c904463a2D36B85fD8738DBEF11d8506",
+    "symbol": "ARB",
+    "priceFeed": "0xCfB20d07D256B2c22968d366a869AE2253E79730",
+    "heartBeat": "86400"
+  },
+  "underlying": {
+    "address": "0xE7e6EA2B6A1D7E7d80727290a86CCC9FE5fbe0C1",
+    "symbol": "USDC",
+    "priceFeed": "0x777edd607B3eB8a9a85F717F660DD160e5140Bfd",
+    "heartBeat": "86400"
+  },
+  "tokens": {
+    "ft": "0xCDAb0ec04fE6B6A5cb3520DDaEd6d6a66952832F",
+    "xt": "0x27710d67bf3633b92d1Df6EAbED4335427612aDb",
+    "gt": "0x4Df3fc482A46dff08609A94f739443dCAB2Cf7d4"
+  },
+  "config": {
+    "marketSymbol": "USDC/ARB@30MAY2025",
+    "treasurer": "0x9ec927F61542DCD12DEF83797D8d1022064dcfA4",
+    "maturity": "04AUG2025",
+    "salt": "0",
+    "fees": {
+      "lendTakerFeeRatio": "2000000",
+      "lendMakerFeeRatio": "2000000",
+      "borrowTakerFeeRatio": "3000000",
+      "borrowMakerFeeRatio": "3000000",
+      "mintGtFeeRatio": "1000000",
+      "mintGtFeeRef": "2000000"
+    }
+  }
+}

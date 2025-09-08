@@ -1,0 +1,20 @@
+{
+  "network": "bera-testnet",
+  "deployedAt": "1751560529",
+  "gitBranch": "deployment",
+  "gitCommitHash": "0x1fe579217606e38614b2461c71e110b433f73cac",
+  "blockInfo": {
+    "number": "6190397",
+    "timestamp": "1751560529"
+  },
+  "deployer": "0xE355d5D8aa52EF0FbbD037C4a3C5E6Fd659cf46B",
+  "contracts": {
+    "factory": "0xBaD2297Edd9E1C38Bef3bFd6B78e862e0C8d697A",
+    "vaultFactory": "0xdC5cb61CdBC8EF3223847d5e555960B3E0Cf9167",
+    "oracleAggregator": "0xa2450A147a1e03109c9ecea50590f13F1e4F10e5",
+    "router": "0x6977d61868b47148E2cfd4e5E52e44818963Eb8E",
+    "swapAdapter": "0xfe1dFCe548E8AEBe2964D5C0c9906FcE981d7E47",
+    "faucet": "0x8B212D2a4820d153e0Ee83402bCFC85cbE9E7f22",
+    "marketViewer": "0xD0F4bA61A691F31463a459B631E997580B6C2C26"
+  }
+}

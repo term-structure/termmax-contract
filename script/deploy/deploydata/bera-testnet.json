@@ -1,0 +1,333 @@
+{
+  "configNum": "8",
+  "configs": {
+    "configs_0": {
+      "salt": 0,
+      "collateralCapForGt": "5000000000000000000000000",
+      "marketName": "HONEY/sUSDe@26SEP2025",
+      "marketSymbol": "HONEY/sUSDe@26SEP2025",
+      "marketConfig": {
+        "maturity": "1758852000",
+        "lendTakerFeeRatio": "2000000",
+        "lendMakerFeeRatio": "2000000",
+        "borrowTakerFeeRatio": "3000000",
+        "borrowMakerFeeRatio": "3000000",
+        "mintGtFeeRatio": "10000000",
+        "mintGtFeeRef": "6000000"
+      },
+      "loanConfig": {
+        "liquidationLtv": "80000000",
+        "maxLtv": "70000000",
+        "liquidatable": true
+      },
+      "underlyingConfig": {
+        "tokenAddr": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Honey",
+        "symbol": "HONEY",
+        "decimals": "18",
+        "initialPrice": "99982544"
+      },
+      "collateralConfig": {
+        "tokenAddr": "0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Staked USDe",
+        "symbol": "sUSDe",
+        "decimals": "18",
+        "initialPrice": "117800068",
+        "gtKeyIdentifier": "GearingTokenWithERC20"
+      }
+    },
+    "configs_1": {
+      "salt": 0,
+      "collateralCapForGt": "5000000000",
+      "marketName": "HONEY/WBTC@26SEP2025",
+      "marketSymbol": "HONEY/WBTC@26SEP2025",
+      "marketConfig": {
+        "maturity": "1758852000",
+        "lendTakerFeeRatio": "2000000",
+        "lendMakerFeeRatio": "2000000",
+        "borrowTakerFeeRatio": "3000000",
+        "borrowMakerFeeRatio": "3000000",
+        "mintGtFeeRatio": "10000000",
+        "mintGtFeeRef": "6000000"
+      },
+      "loanConfig": {
+        "liquidationLtv": "80000000",
+        "maxLtv": "70000000",
+        "liquidatable": true
+      },
+      "underlyingConfig": {
+        "tokenAddr": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Honey",
+        "symbol": "HONEY",
+        "decimals": "18",
+        "initialPrice": "99982544"
+      },
+      "collateralConfig": {
+        "tokenAddr": "0x0555E30da8f98308EdB960aa94C0Db47230d2B9c",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Wrapped BTC",
+        "symbol": "WBTC",
+        "decimals": "8",
+        "initialPrice": "10957116543400",
+        "gtKeyIdentifier": "GearingTokenWithERC20"
+      }
+    },
+    "configs_2": {
+      "salt": 0,
+      "collateralCapForGt": "5000000000000000000000000",
+      "marketName": "HONEY/WBERA@26SEP2025",
+      "marketSymbol": "HONEYWBERA@26SEP2025",
+      "marketConfig": {
+        "maturity": "1758852000",
+        "lendTakerFeeRatio": "2000000",
+        "lendMakerFeeRatio": "2000000",
+        "borrowTakerFeeRatio": "3000000",
+        "borrowMakerFeeRatio": "3000000",
+        "mintGtFeeRatio": "10000000",
+        "mintGtFeeRef": "6000000"
+      },
+      "loanConfig": {
+        "liquidationLtv": "80000000",
+        "maxLtv": "70000000",
+        "liquidatable": true
+      },
+      "underlyingConfig": {
+        "tokenAddr": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Honey",
+        "symbol": "HONEY",
+        "decimals": "18",
+        "initialPrice": "99982544"
+      },
+      "collateralConfig": {
+        "tokenAddr": "0x6969696969696969696969696969696969696969",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Wrapped Bera",
+        "symbol": "WBERA",
+        "decimals": "18",
+        "initialPrice": "171000000",
+        "gtKeyIdentifier": "GearingTokenWithERC20"
+      }
+    },
+    "configs_3": {
+      "salt": 0,
+      "collateralCapForGt": "5000000000000000000000000",
+      "marketName": "HONEY/WETH@26SEP2025",
+      "marketSymbol": "HONEY/WETH@26SEP2025",
+      "marketConfig": {
+        "maturity": "1758852000",
+        "lendTakerFeeRatio": "2000000",
+        "lendMakerFeeRatio": "2000000",
+        "borrowTakerFeeRatio": "3000000",
+        "borrowMakerFeeRatio": "3000000",
+        "mintGtFeeRatio": "10000000",
+        "mintGtFeeRef": "6000000"
+      },
+      "loanConfig": {
+        "liquidationLtv": "80000000",
+        "maxLtv": "70000000",
+        "liquidatable": true
+      },
+      "underlyingConfig": {
+        "tokenAddr": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Honey",
+        "symbol": "HONEY",
+        "decimals": "18",
+        "initialPrice": "99982544"
+      },
+      "collateralConfig": {
+        "tokenAddr": "0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "WETH",
+        "symbol": "WETH",
+        "decimals": "18",
+        "initialPrice": "257500000000",
+        "gtKeyIdentifier": "GearingTokenWithERC20"
+      }
+    },
+    "configs_4": {
+      "salt": 0,
+      "collateralCapForGt": "5000000000",
+      "marketName": "HONEY/LBTC@26SEP2025",
+      "marketSymbol": "HONEY/LBTC@26SEP2025",
+      "marketConfig": {
+        "maturity": "1758852000",
+        "lendTakerFeeRatio": "2000000",
+        "lendMakerFeeRatio": "2000000",
+        "borrowTakerFeeRatio": "3000000",
+        "borrowMakerFeeRatio": "3000000",
+        "mintGtFeeRatio": "10000000",
+        "mintGtFeeRef": "6000000"
+      },
+      "loanConfig": {
+        "liquidationLtv": "80000000",
+        "maxLtv": "70000000",
+        "liquidatable": true
+      },
+      "underlyingConfig": {
+        "tokenAddr": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Honey",
+        "symbol": "HONEY",
+        "decimals": "18",
+        "initialPrice": "99982544"
+      },
+      "collateralConfig": {
+        "tokenAddr": "0xecAc9C5F704e954931349Da37F60E39f515c11c1",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Lombard Staked BTC",
+        "symbol": "LBTC",
+        "decimals": "8",
+        "initialPrice": "10947805610222",
+        "gtKeyIdentifier": "GearingTokenWithERC20"
+      }
+    },
+    "configs_5": {
+      "salt": 0,
+      "collateralCapForGt": "5000000000000000000000000",
+      "marketName": "HONEY/iBGT@26SEP2025",
+      "marketSymbol": "HONEY/iBGT@26SEP2025",
+      "marketConfig": {
+        "maturity": "1758852000",
+        "lendTakerFeeRatio": "2000000",
+        "lendMakerFeeRatio": "2000000",
+        "borrowTakerFeeRatio": "3000000",
+        "borrowMakerFeeRatio": "3000000",
+        "mintGtFeeRatio": "10000000",
+        "mintGtFeeRef": "6000000"
+      },
+      "loanConfig": {
+        "liquidationLtv": "80000000",
+        "maxLtv": "70000000",
+        "liquidatable": true
+      },
+      "underlyingConfig": {
+        "tokenAddr": "0xFCBD14DC51f0A4d49d5E53C2E0950e0bC26d0Dce",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Honey",
+        "symbol": "HONEY",
+        "decimals": "18",
+        "initialPrice": "99982544"
+      },
+      "collateralConfig": {
+        "tokenAddr": "0xac03CABA51e17c86c921E1f6CBFBdC91F8BB2E6b",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Infrared BGT",
+        "symbol": "iBGT",
+        "decimals": "18",
+        "initialPrice": "193000000",
+        "gtKeyIdentifier": "GearingTokenWithERC20"
+      }
+    },
+    "configs_6": {
+      "salt": 0,
+      "collateralCapForGt": "5000000000000000000000000",
+      "marketName": "WBERA/iBGT@26SEP2025",
+      "marketSymbol": "WBERA/iBGT@26SEP2025",
+      "marketConfig": {
+        "maturity": "1758852000",
+        "lendTakerFeeRatio": "2000000",
+        "lendMakerFeeRatio": "2000000",
+        "borrowTakerFeeRatio": "3000000",
+        "borrowMakerFeeRatio": "3000000",
+        "mintGtFeeRatio": "10000000",
+        "mintGtFeeRef": "3000000"
+      },
+      "loanConfig": {
+        "liquidationLtv": "80000000",
+        "maxLtv": "70000000",
+        "liquidatable": true
+      },
+      "underlyingConfig": {
+        "tokenAddr": "0x6969696969696969696969696969696969696969",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Wrapped BERA",
+        "symbol": "WBERA",
+        "decimals": "18",
+        "initialPrice": "171000000"
+      },
+      "collateralConfig": {
+        "tokenAddr": "0xac03CABA51e17c86c921E1f6CBFBdC91F8BB2E6b",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Infrared BGT",
+        "symbol": "iBGT",
+        "decimals": "18",
+        "initialPrice": "193000000",
+        "gtKeyIdentifier": "GearingTokenWithERC20"
+      }
+    },
+    "configs_7": {
+      "salt": 0,
+      "collateralCapForGt": "5000000000000000000000000",
+      "marketName": "WBERA/iBERA@26SEP2025",
+      "marketSymbol": "WBERA/iBERA@26SEP2025",
+      "marketConfig": {
+        "maturity": "1758852000",
+        "lendTakerFeeRatio": "2000000",
+        "lendMakerFeeRatio": "2000000",
+        "borrowTakerFeeRatio": "3000000",
+        "borrowMakerFeeRatio": "3000000",
+        "mintGtFeeRatio": "10000000",
+        "mintGtFeeRef": "3000000"
+      },
+      "loanConfig": {
+        "liquidationLtv": "80000000",
+        "maxLtv": "70000000",
+        "liquidatable": true
+      },
+      "underlyingConfig": {
+        "tokenAddr": "0x6969696969696969696969696969696969696969",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Wrapped BERA",
+        "symbol": "WBERA",
+        "decimals": "18",
+        "initialPrice": "171000000"
+      },
+      "collateralConfig": {
+        "tokenAddr": "0x9b6761bf2397Bb5a6624a856cC84A3A14Dcd3fe5",
+        "priceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "backupPriceFeedAddr": "0x0000000000000000000000000000000000000000",
+        "heartBeat": "86400",
+        "name": "Infrared BERA",
+        "symbol": "iBERA",
+        "decimals": "18",
+        "initialPrice": "165000000",
+        "gtKeyIdentifier": "GearingTokenWithERC20"
+      }
+    }
+  }
+}

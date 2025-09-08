@@ -12,17 +12,16 @@ import {ITermMaxVault} from "contracts/v1/vault/ITermMaxVault.sol";
 
 contract DeployVaultV1Plus is DeployBase {
     // Initialize vault configurations with a single USDC vault
-    address assetAddr = address(0xE7e6EA2B6A1D7E7d80727290a86CCC9FE5fbe0C1);
-    address curator = address(0x2A58A3D405c527491Daae4C62561B949e7F87EFE);
-    address guardian = address(0x2A58A3D405c527491Daae4C62561B949e7F87EFE);
-    address allocator = address(0x2A58A3D405c527491Daae4C62561B949e7F87EFE);
-    string name = "TermMax USDC Vault V1 Plus";
-    string symbol = "TMX-USDC-V1-PLUS";
-    uint256 timelock = 1 seconds;
-    uint256 maxCapacity = 50000000e6;
-    uint64 performanceFeeRate = 1e7; // 10%
-    uint64 minApy = 2e6; // 2%
-    uint64 minIdleFundRate = 1e7; // 10%
+    address assetAddr = address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
+    address curator = address(0x67460001C991708c6A6BAFc511a60c2E414D7Ecf);
+    address guardian = address(0xf1a9676B03Dd3B2066214D2aD8B4B59ED6642C53);
+    string name = "Keyrock USDC";
+    string symbol = "Keyrock-USDC";
+    uint256 timelock = 1 days;
+    uint256 maxCapacity = 100000000e6;
+    uint64 performanceFeeRate = 1e7; // 1e7 for 10%. 0 for 0%
+    uint64 minApy = 1e6; // 1%
+    uint64 minIdleFundRate = 1e7; // 1%
 
     // Network-specific config loaded from environment variables
     string network;
@@ -37,7 +36,6 @@ contract DeployVaultV1Plus is DeployBase {
         string symbol;
         address curator;
         address guardian;
-        address allocator;
         uint256 timelock;
         uint256 maxCapacity;
         uint64 performanceFeeRate;
@@ -55,7 +53,6 @@ contract DeployVaultV1Plus is DeployBase {
             symbol: symbol,
             curator: curator,
             guardian: guardian,
-            allocator: allocator,
             timelock: timelock,
             maxCapacity: maxCapacity,
             performanceFeeRate: performanceFeeRate,
@@ -100,9 +97,6 @@ contract DeployVaultV1Plus is DeployBase {
             vaultConfig.minApy,
             vaultConfig.minIdleFundRate
         );
-
-        AccessManager accessManager = AccessManager(accessManagerAddr);
-        accessManager.setIsAllocatorForVault(ITermMaxVault(address(vault)), vaultConfig.allocator, true);
 
         writeDeploymentJson(currentBlockNum, currentTimestamp, vault, vaultConfig);
 
@@ -219,9 +213,6 @@ contract DeployVaultV1Plus is DeployBase {
             '    "guardian": "',
             vm.toString(config.guardian),
             '",\n',
-            '    "allocator": "',
-            vm.toString(config.allocator),
-            '"\n',
             "  }\n",
             "}"
         );

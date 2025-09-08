@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x26b17abc3bb32de6ab0525ef2dd350da0fa6d288"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "8916737",
+    "timestamp": "1754380608"
+  },
+  "vaultInfo": {
+    "name": "MEV-testnet-Vault",
+    "symbol": "MEV-testnet-Vault",
+    "address": "0x371e1666784493d178273F81Ba8fe85B7B6F389D",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 10000000,
+    "minApy": 0,
+    "minIdleFundRate": 0,
+    "maxCapacity": "50000000000000",
+    "timelock": 86400,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0xa60DFAD00a26822Ead2189aa14B1e534F7152F70",
+    "guardian": "0xE6Be5360C4390aFB1bD80B5Db30C0E65e3C4eD42",
+  }
+}

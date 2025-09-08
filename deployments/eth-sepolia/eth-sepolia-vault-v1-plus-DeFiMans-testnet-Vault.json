@@ -1,0 +1,25 @@
+{
+  "gitInfo": {
+    "branch": "deployment",
+    "commit": "0x0x26b17abc3bb32de6ab0525ef2dd350da0fa6d288"
+  },
+  "blockInfo": {
+    "network": "eth-sepolia",
+    "blockNumber": "8916662",
+    "timestamp": "1754379696"
+  },
+  "vaultInfo": {
+    "name": "DeFiMans-testnet-Vault",
+    "symbol": "DeFiMans-testnet-Vault",
+    "address": "0xC0A5Cec3b03EC52754bca4917e4a2f68e42148f6",
+    "asset": "0xCc121AB1098625728950b200490D28F8B2c324FD",
+    "performanceFeeRate": 10000000,
+    "minApy": 0,
+    "minIdleFundRate": 0,
+    "maxCapacity": "50000000000000",
+    "timelock": 86400,
+    "admin": "0x7662FcF152a9E18280A77f4A8108229E86D398Ab",
+    "curator": "0x92Ac368EbF980F87C7D477Ac084eFEC00E89c092",
+    "guardian": "0x8F51BDBF6cc87A4B6eFC309bA9cF77B8a9A7Aa09",
+  }
+}

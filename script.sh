@@ -3,19 +3,21 @@
 # Check if required arguments are provided
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <network> <command> [options]"
-    echo "Supported networks: eth-sepolia, arb-sepolia, eth-mainnet, arb-mainnet"
+    echo "Supported networks: eth-sepolia, arb-sepolia, eth-mainnet, arb-mainnet, bnb-mainnet, bnb-testnet, bera-testnet, bera-mainnet"
     echo ""
     echo "Commands:"
     echo "  1. Deployment Commands:"
     echo "     - deploy:access-manager  - Deploy Access Manager contract"
     echo "     - deploy:core            - Deploy Core contracts"
     echo "     - deploy:market          - Deploy Market contracts"
+    echo "     - deploy:market-viewer-v1-plus - Deploy Market Viewer V1 Plus contract"
     echo "     - deploy:order           - Deploy Order contracts"
     echo "     - deploy:vault           - Deploy Vault contracts"
     echo "     - deploy:vault-v1-plus   - Deploy Vault V1 Plus contracts"
     echo "     - deploy:vault-factory-v1-plus - Deploy Vault Factory V1 Plus contract"
     echo "     - deploy:pretmx          - Deploy PreTMX token contract"
     echo "     - deploy:adapters        - Deploy Adapters contracts"
+    echo "     - deploy:price-feed-factory-v1 - Deploy PriceFeedFactory V1 contract"
     echo ""
     echo "  2. Script Commands:"
     echo "     - script:<script-name>   - Run a custom script (e.g., script:GrantRoles, script:SubmitOracles)"
@@ -24,6 +26,7 @@ if [ "$#" -lt 2 ]; then
     echo "  --broadcast     Broadcast transactions (default: dry run)"
     echo "  --verify        Enable contract verification"
     echo "  --tenderly      Enable verification on Tenderly"
+    echo "  --resume        Resume a previously interrupted broadcast"
     echo "  --debug         Show complete command with sensitive information (for debugging)"
     exit 1
 fi
@@ -48,6 +51,7 @@ fi
 BROADCAST=""
 VERIFY=""
 TENDERLY=""
+RESUME=""
 DEBUG=""
 
 # Parse remaining options
@@ -65,6 +69,10 @@ while [[ $# -gt 0 ]]; do
             TENDERLY="yes"
             shift
             ;;
+        --resume)
+            RESUME="--resume"
+            shift
+            ;;
         --debug)
             DEBUG="yes"
             shift
@@ -78,12 +86,12 @@ done
 
 # Validate network
 case $NETWORK in
-    "eth-sepolia"|"arb-sepolia"|"eth-mainnet"|"arb-mainnet"|"bnb-mainnet"|"bnb-testnet")
+    "eth-sepolia"|"arb-sepolia"|"eth-mainnet"|"arb-mainnet"|"bnb-mainnet"|"bnb-testnet"|"bera-testnet"|"bera-mainnet")
         echo "Running on $NETWORK..."
         ;;
     *)
         echo "Unsupported network: $NETWORK"
-        echo "Supported networks: eth-sepolia, arb-sepolia, eth-mainnet, arb-mainnet"
+        echo "Supported networks: eth-sepolia, arb-sepolia, eth-mainnet, arb-mainnet, bnb-mainnet, bnb-testnet, bera-testnet, bera-mainnet"
         exit 1
         ;;
 esac
@@ -91,12 +99,12 @@ esac
 # If deploying, validate deployment type
 if [ "$OPERATION" = "deploy" ]; then
     case $TYPE in
-        "access-manager"|"core"|"market"|"order"|"vault"|"vault-v1-plus"|"vault-factory-v1-plus"|"pretmx"|"adapters")
+        "access-manager"|"core"|"market"|"market-viewer-v1-plus"|"order"|"vault"|"vault-v1-plus"|"vault-factory-v1-plus"|"pretmx"|"adapters")
             echo "Deployment type: $TYPE"
             ;;
         *)
             echo "Unsupported deployment type: $TYPE"
-            echo "Supported deployment types: access-manager, core, market, order, vault, vault-v1-plus, vault-factory-v1-plus, pretmx, adapters"
+            echo "Supported deployment types: access-manager, core, market, market-viewer-v1-plus, order, vault, vault-v1-plus, vault-factory-v1-plus, pretmx, adapters"
             exit 1
             ;;
     esac
@@ -187,6 +195,8 @@ if [ "$OPERATION" = "deploy" ]; then
         SCRIPT_NAME="DeployVaultV1Plus"
     elif [ "$TYPE" = "vault-factory-v1-plus" ]; then
         SCRIPT_NAME="DeployVaultFactoryV1Plus"
+    elif [ "$TYPE" = "market-viewer-v1-plus" ]; then
+        SCRIPT_NAME="DeployMarketViewerV1Plus"
     else
         TYPE_CAPITALIZED="$(tr '[:lower:]' '[:upper:]' <<< ${TYPE:0:1})${TYPE:1}"
         SCRIPT_NAME="Deploy${TYPE_CAPITALIZED}"
@@ -244,6 +254,7 @@ echo "RPC URL: $RPC_MASKED"
 echo "Admin Address: $ADMIN_ADDRESS"
 
 echo "Mode: ${BROADCAST:+Live Broadcast}${BROADCAST:-Dry Run}"
+echo "Resume: ${RESUME:+Enabled}${RESUME:-Disabled}"
 echo "Verification: ${VERIFY:+Enabled}${VERIFY:-Disabled}"
 echo "Tenderly Verification: ${TENDERLY:+Enabled}${TENDERLY:-Disabled}"
 echo "Debug Mode: ${DEBUG:+Enabled}${DEBUG:-Disabled}"
@@ -278,6 +289,10 @@ if [ ! -z "$BROADCAST" ]; then
     if [ ! -z "$TENDERLY" ]; then
         FORGE_CMD="$FORGE_CMD --verifier-url $TENDERLY_VERIFIER_URL --etherscan-api-key $TENDERLY_ACCESS_KEY"
     fi
+fi
+
+if [ ! -z "$RESUME" ]; then
+    FORGE_CMD="$FORGE_CMD $RESUME"
 fi
 
 if [ ! -z "$VERIFY" ]; then
